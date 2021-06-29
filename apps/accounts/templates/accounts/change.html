@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} change password {% endblock title %}
+{% block body %}
+<h3>change password</h3>
+<hr>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">change</button>
+</form>
+{% endblock body %}
