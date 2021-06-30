@@ -5,10 +5,12 @@ from apps.accounts.models.team_user import TeamUser
 from apps.accounts.models.user import User
 
 
-class TeamUserAdmin(admin.ModelAdmin):
-    list_display = ['id', 'team', 'first_name', 'last_name']
+# class TeamUserAdmin(admin.ModelAdmin):
+#     list_display = ['id', 'team', 'first_name', 'last_name']
 
-
+@admin.register(User)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ['username', 'team']
 admin.site.register(Team)
-admin.site.register(User)
-admin.site.register(TeamUser, TeamUserAdmin)
+# admin.site.register(User)
+admin.site.register(TeamUser)

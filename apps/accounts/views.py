@@ -1,18 +1,39 @@
 from random import randint
-
+from django.contrib.auth import logout as django_logout
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.cache import cache
 from django.shortcuts import render, redirect
 from django.views import View
+from django.views.generic import UpdateView
 
 from common.utilities import send_smd, set_otp_cache
 from .forms import *
+from django.contrib.auth import authenticate, login
 
 User = get_user_model()
+
+
+def register(request):
+    if request.method == 'POST':
+        team_form = TeamRegisterForm(request.POST)
+        if team_form.is_valid():
+            data = team_form.cleaned_data
+            team = Team.objects.create(fa_name=data['fa_name'], en_name=data['en_name'], phone=data['phone'])
+            messages.success(request, '؟؟', 'primary')
+            phone = team.phone
+            code = randint(1000, 9999)
+            print(code)
+            set_otp_cache(team.id, code)
+            # send_smd(code, phone)
+            return redirect('second_login', team.id)
+    else:
+        team_form = TeamRegisterForm()
+
+    context = {'team_form': team_form}
+    return render(request, 'accounts/register.html', context)
 
 
 class Login(View):
@@ -29,7 +50,7 @@ class Login(View):
             code = randint(1000, 9999)
             print(code)
             set_otp_cache(team.id, code)
-            send_smd(code, phone)
+            # send_smd(code, phone)
             return redirect('second_login', pk=team.id)
         else:
             messages.success(request, 'لطفا نام تیم خود را وارد کنید', 'primary')
@@ -53,8 +74,18 @@ class OTPLogin(View):
             cache_team = cache.get(key=team.id)
             if not cache_team == None:
                 if validated_data['code'] == cache_team['code']:
-                    request.session['team_id'] = team.id
-                    return redirect('teamprofile')
+                    if len(User.objects.filter(team=team)) != 0:
+                        user = User.objects.get(team=team)
+                        authenticate(request, username=user.username, password=user.password)
+                        login(request, user)
+                        team.verify_phone = True
+                        team.save()
+                        return redirect('home')
+                    else:
+                        user = User(username=team.en_name, team=team)
+                        user.set_password('1234')
+                        user.save()
+
                 else:
                     messages.success(request, 'کد وارد شده صحیح نیست', 'primary')
                     return render(request, 'accounts/second_login.html', {'form': form})
@@ -63,40 +94,17 @@ class OTPLogin(View):
                 return render(request, 'accounts/second_login.html', {'form': form})
 
 
-def register(request):
-    if request.method == 'POST':
-        team_form = TeamRegisterForm(request.POST)
-        if team_form.is_valid():
-            data = team_form.cleaned_data
-            team = Team.objects.create(fa_name=data['fa_name'], en_name=data['en_name'], phone=data['phone'])
-            messages.success(request, '؟؟', 'primary')
-            phone = team.phone
-            code = randint(1000, 9999)
-            print(code)
-            set_otp_cache(team.id, code)
-            send_smd(code, phone)
-            return redirect('second_login', team.id)
-    else:
-        team_form = TeamRegisterForm()
-
-    context = {'team_form': team_form}
-    return render(request, 'accounts/register.html', context)
+@login_required(login_url='login')
+def user_logout(request):
+    django_logout(request)
+    messages.success(request, 'با موفقیت خارج شدید', 'success')
+    return redirect('home')
 
 
-class Logout(View):
-    def get(self, request):
-        try:
-            del request.session['team_id']
-        except KeyError:
-            pass
-        return redirect('home')
-
-
-@login_required(login_url='accounts:login')
+@login_required(login_url='login')
 def team_profile(request):
     team = request.user.team
     member = TeamUser.objects.filter(team=team)
-
     return render(request, 'accounts/teamprofile.html', {'team': team, 'member': member})
 
 
@@ -117,6 +125,8 @@ def add_member(request):
                     messages.success(request, 'عضو تیم با موفقیت اضافه شد', 'primary')
                 else:
                     messages.error(request, 'عضو تیم قبلا اضافه شده است', 'danger')
+            else:
+                messages.error(request, 'اسامی ولید نیست')
 
         else:
             messages.error(request, 'مجاز به اضافه کردن بیش از 5 نفر نیستید', 'danger')
@@ -132,17 +142,24 @@ def team_update(request):
     if request.method == 'POST':
         team_form = TeamRegisterForm(request.POST, instance=request.user.team)
         member_form = MemberTeamForm(request.POST)
+        admin_form = AdminTeamForm(request.POST)
         if team_form.is_valid():
             team_form.save()
-            messages.success(request, 'update successfully', 'success')
+            user = User.objects.get(id=request.user.id)
+            user.username = team.en_name
+            user.save()
+            messages.success(request, 'آپدیت انجام شد', 'success')
             return redirect('teamprofile')
         else:
-            messages.error(request, "Error")
+            messages.error(request, "ولید نیست")
+            return redirect('update')
+
     else:
         team_form = TeamRegisterForm(instance=request.user.team)
         member_form = MemberTeamForm()
-
-    context = {'team': team, 'member': member, 'team_form': team_form, 'member_form': member_form}
+        admin_form = AdminTeamForm()
+    context = {'team': team, 'member': member, 'team_form': team_form, 'member_form': member_form,
+               'admin_form': admin_form}
     return render(request, 'accounts/update.html', context)
 
 
@@ -158,18 +175,20 @@ def remove_member(request, id):
 
 
 @login_required(login_url='login')
-def change_password(request):
+def update_admin(request):
+    url = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
+        form = AdminTeamForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, form.user)
-            messages.success(request, 'پسورد با موفقیت تغییر کرد', 'success')
-            return redirect('home')
+            data = form.cleaned_data
+            user = User.objects.get(id=request.user.id)
+            user.first_name = data['first_name']
+            user.last_name = data['last_name']
+            user.file_resume = data['file_resume']
+            user.email = data['email']
+            user.save()
+            messages.success(request, 'ادمین اپدیت', 'primary')
         else:
-            messages.error(request, 'پسورد درست انتخاب نشده است', 'danger')
-            return redirect('change')
-    else:
-        form = PasswordChangeForm(request.user)
+            messages.error(request, 'اسامی فارسی و ولید')
 
-    return render(request, 'accounts/change.html', {'form': form})
+    return redirect(url)

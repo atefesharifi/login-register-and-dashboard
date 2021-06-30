@@ -4,42 +4,9 @@ from django.forms import ModelForm
 
 from apps.accounts.models.team import Team
 from apps.accounts.models.team_user import TeamUser
+from common.validators import FARSI_LANGUAGE
 
 User = get_user_model()
-
-
-class UserRegisterForm(forms.Form):
-    user_name = forms.CharField(max_length=50)
-    email = forms.EmailField()
-    first_name = forms.CharField(max_length=50)
-    last_name = forms.CharField(max_length=50)
-    file_resume = forms.FileField()
-
-    def __str__(self):
-        return self.user_name
-
-    def clean_user_name(self):
-        user = self.cleaned_data['user_name']
-        if User.objects.filter(username=user).exists():
-            raise forms.ValidationError('user.exist')
-        return user
-
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
-            raise forms.ValidationError('email exists')
-        return email
-
-    def clean_password_2(self):
-        password1 = self.cleaned_data['password_1']
-        password2 = self.cleaned_data['password_2']
-        if password1 != password2:
-            raise forms.ValidationError('password not match')
-        elif len(password2) < 5:
-            raise forms.ValidationError('password to short')
-        elif not any(x.isupper() for x in password2):
-            raise forms.ValidationError('پسورد باید حداقل یک حروف بزرگ داشته باشد')
-        return password1
 
 
 class UserLoginForm(forms.Form):
@@ -53,10 +20,17 @@ class UserOTPForm(forms.Form):
 class TeamRegisterForm(ModelForm):
     class Meta:
         model = Team
-        fields = '__all__'
+        fields = ['en_name', 'fa_name', 'phone']
 
 
 class MemberTeamForm(ModelForm):
     class Meta:
         model = TeamUser
         fields = ['first_name', 'last_name', 'file_resume']
+
+
+class AdminTeamForm(forms.Form):
+    first_name = forms.CharField(max_length=20, validators=[FARSI_LANGUAGE])
+    last_name = forms.CharField(max_length=25, validators=[FARSI_LANGUAGE])
+    file_resume = forms.FileField()
+    email = forms.CharField(max_length=40)
