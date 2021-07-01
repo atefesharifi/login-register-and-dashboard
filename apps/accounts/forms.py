@@ -32,5 +32,5 @@ class MemberTeamForm(ModelForm):
 class AdminTeamForm(forms.Form):
     first_name = forms.CharField(max_length=20, validators=[FARSI_LANGUAGE])
     last_name = forms.CharField(max_length=25, validators=[FARSI_LANGUAGE])
-    file_resume = forms.FileField()
-    email = forms.CharField(max_length=40)
+    file_resume = forms.FileField(required=False)
+    email = forms.EmailField(max_length=40, required=False)

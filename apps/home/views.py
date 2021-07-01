@@ -34,7 +34,7 @@ def sendcode(request):
             user = request.user
             user.code = data
             user.save()
-            messages.success(request, 'code send', 'success')
+            messages.success(request, 'کد شما ثبت شد', 'success')
             return redirect('home')
     else:
         form = CodeForm()

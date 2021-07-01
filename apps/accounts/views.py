@@ -85,6 +85,9 @@ class OTPLogin(View):
                         user = User(username=team.en_name, team=team)
                         user.set_password('1234')
                         user.save()
+                        authenticate(request, username=user.username, password=user.password)
+                        login(request, user)
+                        return redirect('home')
 
                 else:
                     messages.success(request, 'کد وارد شده صحیح نیست', 'primary')
@@ -157,7 +160,11 @@ def team_update(request):
     else:
         team_form = TeamRegisterForm(instance=request.user.team)
         member_form = MemberTeamForm()
-        admin_form = AdminTeamForm()
+        user = User.objects.get(id=request.user.id)
+        data_user = {'first_name': user.first_name, 'last_name': user.last_name,
+                     'email': user.email}
+        admin_form = AdminTeamForm(
+            initial=data_user)
     context = {'team': team, 'member': member, 'team_form': team_form, 'member_form': member_form,
                'admin_form': admin_form}
     return render(request, 'accounts/update.html', context)
@@ -184,11 +191,12 @@ def update_admin(request):
             user = User.objects.get(id=request.user.id)
             user.first_name = data['first_name']
             user.last_name = data['last_name']
-            user.file_resume = data['file_resume']
+            if data['file_resume']:
+                user.file_resume = data['file_resume']
             user.email = data['email']
             user.save()
             messages.success(request, 'ادمین اپدیت', 'primary')
         else:
-            messages.error(request, 'اسامی فارسی و ولید')
+            messages.error(request, 'اسامی فارسی وارد شود')
 
     return redirect(url)
