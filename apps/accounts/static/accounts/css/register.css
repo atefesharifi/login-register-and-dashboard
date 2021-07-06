@@ -1,0 +1,65 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr;
+  grid-template-areas:
+"pic main ";
+  height: 100vh;
+}
+
+.pic{
+  text-align: center;
+}
+
+.main{
+  text-align: center;
+  
+}
+.sign-in-face-cup {
+    width: 1366px;
+    height: 768px;
+    padding: 36px;
+    background-color: #f6f6f6;
+  }
+
+.Rectangle-1 {
+    width: 1294px;
+    height: 696px;
+    padding: 58px 83px 54px 80px;
+    background-color: #ffffff;
+  }
+
+.cover {
+    width: 627px;
+    height: 584px;
+    margin: 0 104px 0 0;
+    object-fit: contain;
+  }
+
+.\- {
+    width: 90px;
+    height: 48px;
+    margin: 0 155px 4px;
+    font-family: Vazir;
+    font-size: 30px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    color: #06102e;
+  }
+.email-icon {
+    width: 24px;
+    height: 24px;
+    margin: 5.3px 269px 0 2px;
+    object-fit: contain;
+  }
+
+.Line-12 {
+  width: 140px;
+  height: 1px;
+  margin: 4px 129.5px 51.8px 130.5px;
+  opacity: 0.56;
+  background-color: #9b9b9b;
+}

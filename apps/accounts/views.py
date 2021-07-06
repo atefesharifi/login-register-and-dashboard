@@ -44,7 +44,7 @@ class Login(View):
             user_name = data['en_name']
             if Team.objects.filter(en_name=user_name).count() == 0:
                 messages.success(request, 'ابتدا ثبت نام کنید', 'warning')
-                return redirect('register')
+                return redirect('accounts:register')
             team = Team.objects.get(en_name=user_name)
             phone = team.phone
             code = randint(1000, 9999)

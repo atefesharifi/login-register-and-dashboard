@@ -1,0 +1,200 @@
+.log-in-face-cup {
+    
+    width: 1366px;
+    height: 768px;
+    padding: 36px;
+    background-color: #f6f6f6;
+  }
+
+.Rectangle-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1294px;
+    height: 696px;
+    padding: 58px 83px 54px 80px;
+    background-color: #ffffff;
+  }
+
+.cover {
+    width: 627px;
+    height: 584px;
+    margin: 0 0 0 504px;
+    object-fit: contain;
+  }
+
+  .Line-12 {
+    width: 140px;
+    height: 1px;
+    margin: 4px 12.5px 51.8px 132.5px;
+    opacity: 0.56;
+    background-color: #9b9b9b;
+  }
+
+.lbl1 {
+        width: 50px;
+        height: 48px;
+        margin: 0 60px 4px 175px;
+        font-family: Vazir;
+        font-size: 30px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: right;
+        color: #06102e;
+}
+
+.Line-12 {
+    width: 140px;
+    height: 1px;
+    margin: 4px 12.5px 51.8px 132.5px;
+    opacity: 0.56;
+    background-color: #9b9b9b;
+  }
+
+.lbl2 {
+        width: 178px;
+        height: 29px;
+        margin: 0 0 0.3px 194px;
+        font-family: Vazir;
+        font-size: 18px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #6c6c76;
+}
+.email-icon {
+    width: 24px;
+    height: 24px;
+    margin: 5.3px 194px 0 2px;
+    object-fit: contain;
+  }
+
+.Line-2 {
+    width: 400px;
+    height: 1px;
+    margin: 86.3px 0 59.5px;
+    background-color: #6c6c76;
+  }
+
+.lbl3 {
+        width: 68px;
+        height: 29px;
+        margin: 0 0 0.3px 304px;
+        font-family: Vazir;
+        font-size: 18px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #6c6c76;
+}
+
+.password-icon {
+    width: 24px;
+    height: 24px;
+    margin: 5.3px 304px 0 2px;
+    object-fit: contain;
+  }
+
+  .Rectangle-1 {
+    width: 1294px;
+    height: 696px;
+    padding: 58px 83px 54px 80px;
+    background-color: #ffffff;
+  }
+
+.Component-1-2 {
+  width: 13px;
+  height: 13px;
+  margin: 23.8px 0 141.5px 8px;
+  object-fit: contain;
+}
+
+.lbl4 {
+    width: 94px;
+    height: 26px;
+    margin: 17.8px 8px 134.5px 12.5px;
+    font-family: Vazir;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    color: #6c6c76;
+  }
+
+  .lbl5 {
+    width: 89px;
+    height: 39px;
+    font-family: Vazir;
+    font-size: 24px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+  }
+
+  .Rectangle-1 {
+    width: 330px;
+    height: 48px;
+    margin: 134.5px 22px 20.5px 35px;
+    padding: 4px 111px 5px 130px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-image: linear-gradient(260deg, #16255f 116%, #8f48ff -34%);
+  }
+  .lbl6 {
+    width: 178px;
+    height: 23px;
+    margin: 20.5px 98px 12px 111px;
+    font-family: Vazir;
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.14;
+    letter-spacing: normal;
+    text-align: right;
+    color: #06102e;
+  }
+  .lbl7 {
+    width: 148px;
+    height: 23px;
+    margin: 0 0 0 3px;
+    font-family: Vazir;
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.14;
+    letter-spacing: normal;
+    text-align: right;
+    color: #6c6c76;
+  }
+  .lbl8 {
+    width: 62px;
+    height: 23px;
+    margin: 0 3px 0 0;
+    font-family: Vazir;
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.14;
+    letter-spacing: normal;
+    text-align: right;
+    color: #06102e;
+  }

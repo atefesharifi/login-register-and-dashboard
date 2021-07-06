@@ -1,49 +1,49 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block css %} {% endblock css %}
+{% block title %} {% endblock title %} {% block body %}
+<h3>فرم اضافه کردن ادمین</h3>
+<br />
+<form
+  method="POST"
+  action="{% url 'add_admin' %}"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %} {{ admin_form }}
+  <button type="submit" class="btn btn-outline-warning btn-long cart">
+    اضافه به اعضا
+  </button>
+</form>
+<hr />
+<h3>فرم اضافه کردن اعضا</h3>
+<br />
+<form method="POST" action="{% url 'add' %}" enctype="multipart/form-data">
+  {% csrf_token %} {{ member_form }}
+  <button type="submit" class="btn btn-outline-warning btn-long cart">
+    اضافه به اعضا
+  </button>
+</form>
+<hr />
 
-{% block css %}
-{% endblock css %}
+<h3>حذف اعضا</h3>
+{% for m in member %} {{ m.first_name }} {{ m.last_name }}
+<a href="{% url 'remove' m.id %}"><i class="fa fa-trash"></i></a>
+<br />
+{% endfor %}
 
-{% block title %} {% endblock title %}
+<br />
 
-{% block body %}
-    <h3>فرم اضافه کردن ادمین</h3>
-    <br>
-    <form method="POST" action="{% url 'add_admin' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ admin_form }}
-        <button type="submit" class="btn btn-outline-warning btn-long cart">اضافه به اعضا</button>
-    </form>
-    <hr>
-    <h3>فرم اضافه کردن اعضا</h3>
-    <br>
-    <form method="POST" action="{% url 'add' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ member_form }}
-        <button type="submit" class="btn btn-outline-warning btn-long cart">اضافه به اعضا</button>
-    </form>
-    <hr>
+<form
+  class=""
+  action="/accounts/update/"
+  method="POST"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %}
+  <h3>ویرایش مشخصات تیم</h3>
+  {{ team_form.as_p }}<br />
 
-
-    <h3>حذف اعضا</h3>
-    {% for m in member %}
-        {{ m.first_name }}
-        {{ m.last_name }}
-        <a href="{% url 'remove' m.id %}"><i class="fa fa-trash"></i></a>
-        <br>
-    {% endfor %}
-
-    <br>
-
-
-    <form class="" action="/accounts/update/" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h3> ویرایش مشخصات تیم </h3>
-        {{ team_form.as_p }}<br>
-
-
-        <button type="submit" class="btn btn-info btn-md" style="width: 300px;">بروزرسانی</button>
-    </form>
-
+  <button type="submit" class="btn btn-info btn-md" style="width: 300px">
+    بروزرسانی
+  </button>
+</form>
 
 {% endblock body %}
