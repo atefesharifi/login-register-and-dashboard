@@ -22,13 +22,13 @@ def register(request):
         if team_form.is_valid():
             data = team_form.cleaned_data
             team = Team.objects.create(fa_name=data['fa_name'], en_name=data['en_name'], phone=data['phone'])
-            messages.success(request, '؟؟', 'primary')
+            messages.success(request, 'تیم با موفقیت ثبت شد', 'primary')
             phone = team.phone
             code = randint(1000, 9999)
             print(code)
             set_otp_cache(team.id, code)
             # send_smd(code, phone)
-            return redirect('second_login', team.id)
+            return redirect('accounts:second_login', team.id)
     else:
         team_form = TeamRegisterForm()
 
@@ -50,8 +50,8 @@ class Login(View):
             code = randint(1000, 9999)
             print(code)
             set_otp_cache(team.id, code)
-            # send_smd(code, phone)
-            return redirect('second_login', pk=team.id)
+            send_smd(code, phone)
+            return redirect('accounts:second_login', pk=team.id)
         else:
             messages.success(request, 'لطفا نام تیم خود را وارد کنید', 'primary')
             return render(request, 'accounts/login.html', {'form': form})
@@ -80,14 +80,14 @@ class OTPLogin(View):
                         login(request, user)
                         team.verify_phone = True
                         team.save()
-                        return redirect('home')
+                        return redirect('home:home')
                     else:
                         user = User(username=team.en_name, team=team)
                         user.set_password('1234')
                         user.save()
                         authenticate(request, username=user.username, password=user.password)
                         login(request, user)
-                        return redirect('home')
+                        return redirect('home:home')
 
                 else:
                     messages.success(request, 'کد وارد شده صحیح نیست', 'primary')
@@ -101,7 +101,7 @@ class OTPLogin(View):
 def user_logout(request):
     django_logout(request)
     messages.success(request, 'با موفقیت خارج شدید', 'success')
-    return redirect('home')
+    return redirect('home:home')
 
 
 @login_required(login_url='login')
@@ -152,10 +152,10 @@ def team_update(request):
             user.username = team.en_name
             user.save()
             messages.success(request, 'آپدیت انجام شد', 'success')
-            return redirect('teamprofile')
+            return redirect('accounts:teamprofile')
         else:
             messages.error(request, "ولید نیست")
-            return redirect('update')
+            return redirect('accounts:update')
 
     else:
         team_form = TeamRegisterForm(instance=request.user.team)
