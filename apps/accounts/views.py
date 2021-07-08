@@ -29,6 +29,10 @@ def register(request):
             set_otp_cache(team.id, code)
             # send_smd(code, phone)
             return redirect('accounts:second_login', team.id)
+        else:
+            messages.success(request, 'لطفا اطلاعات صحیح وارد کنید', 'secondary')
+            return render(request, 'accounts/register.html', {'team_form': team_form})
+
     else:
         team_form = TeamRegisterForm()
 
@@ -53,7 +57,7 @@ class Login(View):
             send_smd(code, phone)
             return redirect('accounts:second_login', pk=team.id)
         else:
-            messages.success(request, 'لطفا نام تیم خود را وارد کنید', 'primary')
+            messages.success(request, 'لطفا نام تیم خود را وارد کنید', 'secondary')
             return render(request, 'accounts/login.html', {'form': form})
 
     def get(self, request):
@@ -90,10 +94,10 @@ class OTPLogin(View):
                         return redirect('home:home')
 
                 else:
-                    messages.success(request, 'کد وارد شده صحیح نیست', 'primary')
+                    messages.success(request, 'کد وارد شده صحیح نیست', 'danger')
                     return render(request, 'accounts/second_login.html', {'form': form})
             else:
-                messages.success(request, 'کد منقضی شده', 'primary')
+                messages.success(request, 'کد منقضی شده است', 'warning')
                 return render(request, 'accounts/second_login.html', {'form': form})
 
 
@@ -125,11 +129,11 @@ def add_member(request):
                 if not TeamUser.objects.filter(first_name=data['first_name'], last_name=data['last_name'], team=team):
                     TeamUser.objects.create(team=team, first_name=data['first_name'], last_name=data['last_name'],
                                             file_resume=data['file_resume'])
-                    messages.success(request, 'عضو تیم با موفقیت اضافه شد', 'primary')
+                    messages.success(request, 'عضو تیم با موفقیت اضافه شد', 'success')
                 else:
-                    messages.error(request, 'عضو تیم قبلا اضافه شده است', 'danger')
+                    messages.error(request, 'عضو تیم قبلا اضافه شده است', 'warning')
             else:
-                messages.error(request, 'اسامی ولید نیست')
+                messages.error(request, 'اسامی معتبر نیستند', 'danger')
 
         else:
             messages.error(request, 'مجاز به اضافه کردن بیش از 5 نفر نیستید', 'danger')
@@ -151,10 +155,10 @@ def team_update(request):
             user = User.objects.get(id=request.user.id)
             user.username = team.en_name
             user.save()
-            messages.success(request, 'آپدیت انجام شد', 'success')
+            messages.success(request, 'به روز رسانی انجام شد', 'success')
             return redirect('accounts:teamprofile')
         else:
-            messages.error(request, "ولید نیست")
+            messages.error(request, 'به دلیل اطلاعات نادرست به روز رسانی انجام نشد', 'warning')
             return redirect('accounts:update')
 
     else:
@@ -195,8 +199,8 @@ def update_admin(request):
                 user.file_resume = data['file_resume']
             user.email = data['email']
             user.save()
-            messages.success(request, 'ادمین اپدیت', 'primary')
+            messages.success(request, 'به روز رسانی اطلاعات مدیر تیم با موفقیت انجام شد', 'primary')
         else:
-            messages.error(request, 'اسامی فارسی وارد شود')
+            messages.error(request, 'اسامی فارسی وارد شود','warning')
 
     return redirect(url)

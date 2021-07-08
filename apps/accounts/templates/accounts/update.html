@@ -4,7 +4,7 @@
 <br />
 <form
   method="POST"
-  action="{% url 'add_admin' %}"
+  action="{% url 'accounts:add_admin' %}"
   enctype="multipart/form-data"
 >
   {% csrf_token %} {{ admin_form }}
@@ -15,7 +15,11 @@
 <hr />
 <h3>فرم اضافه کردن اعضا</h3>
 <br />
-<form method="POST" action="{% url 'add' %}" enctype="multipart/form-data">
+<form
+  method="POST"
+  action="{% url 'accounts:add' %}"
+  enctype="multipart/form-data"
+>
   {% csrf_token %} {{ member_form }}
   <button type="submit" class="btn btn-outline-warning btn-long cart">
     اضافه به اعضا
@@ -25,11 +29,11 @@
 
 <h3>حذف اعضا</h3>
 {% for m in member %} {{ m.first_name }} {{ m.last_name }}
-<a href="{% url 'remove' m.id %}"><i class="fa fa-trash"></i></a>
+<a href="{% url 'accounts:remove' m.id %}"><i class="fa fa-trash"></i></a>
 <br />
 {% endfor %}
 
-<br />
+<hr />
 
 <form
   class=""

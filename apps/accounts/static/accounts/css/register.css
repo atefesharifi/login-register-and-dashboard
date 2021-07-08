@@ -139,9 +139,9 @@ a {
   visibility: hidden;
 }
 .lbl1 {
-  width: 90px;
-  height: 48px;
-  margin: 0 155px 4px;
+  /* width: 90px; */
+  /* height: 48px; */
+  /* margin: 0 155px 4px; */
   font-family: Vazir;
   font-size: 30px;
   font-weight: 500;
@@ -149,7 +149,7 @@ a {
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  text-align: right;
+  text-align: center;
   color: #06102e;
 }
 
@@ -364,6 +364,9 @@ input {
 
 .floating__input:focus + .floating__label::before {
   color: var(--color__accent);
+}
+.text-right {
+  text-align: right;
 }
 .hidden--visually {
   border: 0;

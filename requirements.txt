@@ -26,3 +26,4 @@ zeep==4.0.0
 kavenegar
 redis
 django_redis
+Pillow

@@ -144,10 +144,13 @@ a {
   padding: 4px 111px 5px 130px;
   border-radius: 10px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
-  background-image: linear-gradient(260deg, #16255f 116%, #8f48ff -34%);
+  /* background-image: linear-gradient(#16255f 116%, #8f48ff -34%); */
+  background-image: linear-gradient(260deg, #16255f, #8f48ff);
+  transition: 0.3s;
 }
-.Rectangle-2 :hover {
-  background-image: (260deg, #16255f 116%);
+
+.Rectangle-2:hover {
+  background-image: linear-gradient(#16255f, #16255f);
 }
 
 .lineshow {
