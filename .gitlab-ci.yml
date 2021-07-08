@@ -1,0 +1,26 @@
+include:
+  - project: 'aibox/devops/ci-cd'
+    file: '/templates/.gitlab-ci-template.yml'
+  - project: 'aibox/devops/ci-cd'
+    file: '/templates/.gitlab-cd-template.yml'
+
+stages:
+  - build
+  - deploy
+
+default:
+  before_script:
+    - if [ $CI_COMMIT_REF_NAME == "cicd" ]
+    - then
+    - export NODE_PORT=31120
+    - elif [ $CI_COMMIT_REF_NAME == "develop" ]
+    - then
+    - export NODE_PORT=31220
+    - elif [ $CI_COMMIT_REF_NAME == "stage" ]
+    - then
+    - export NODE_PORT=31320
+    - elif [ $CI_COMMIT_REF_NAME == "master" ]
+    - then
+    - export NODE_PORT=31420
+    - fi
+    - echo $NODE_PORT
