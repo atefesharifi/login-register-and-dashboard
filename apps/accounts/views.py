@@ -30,7 +30,7 @@ def register(request):
             # send_smd(code, phone)
             return redirect('accounts:second_login', team.id)
         else:
-            messages.success(request, 'لطفا اطلاعات صحیح وارد کنید', 'secondary')
+            messages.error(request, 'لطفا اطلاعات صحیح وارد کنید', 'secondary')
             return render(request, 'accounts/register.html', {'team_form': team_form})
 
     else:
@@ -54,23 +54,24 @@ class Login(View):
             code = randint(1000, 9999)
             print(code)
             set_otp_cache(team.id, code)
-            send_smd(code, phone)
+            # send_smd(code, phone)
             return redirect('accounts:second_login', pk=team.id)
         else:
             messages.success(request, 'لطفا نام تیم خود را وارد کنید', 'secondary')
             return render(request, 'accounts/login.html', {'form': form})
 
-    def get(self, request):
+    def get(self, request):     
         form = UserLoginForm()
         return render(request, 'accounts/login.html', {'form': form})
 
 
 class OTPLogin(View):
     def get(self, request, pk):
+        messages.success(request, 'رمز عبور یکبار مصرف ارسال شد', 'success')
         form = UserOTPForm()
-        return render(request, 'accounts/second_login.html', {'form': form})
+        return render(request, 'accounts/second_login.html', {'form': form,'pk':pk})
 
-    def post(self, request, pk):
+    def post(self, request, pk):       
         form = UserOTPForm(request.POST)
         if form.is_valid():
             team = Team.objects.get(id=pk)
@@ -99,6 +100,9 @@ class OTPLogin(View):
             else:
                 messages.success(request, 'کد منقضی شده است', 'warning')
                 return render(request, 'accounts/second_login.html', {'form': form})
+        else:
+            messages.error(request, 'لطفا رمز عبور را وارد کنید', 'secondary')
+            return render(request, 'accounts/second_login.html',{'form': form})
 
 
 @login_required(login_url='login')
@@ -204,3 +208,14 @@ def update_admin(request):
             messages.error(request, 'اسامی فارسی وارد شود','warning')
 
     return redirect(url)
+
+def pass_duplicate(request,pk):
+    team = Team.objects.get(id=pk)
+    phone = team.phone
+    code = randint(1000, 9999)
+    print(code)
+    set_otp_cache(team.id, code)
+    # send_smd(code, phone)
+    return redirect('accounts:second_login', pk=team.id)
+
+

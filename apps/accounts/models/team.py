@@ -12,3 +12,6 @@ class Team(models.Model):
 
     def __str__(self):
         return str(self.en_name)
+
+    def get_absolute_url(self):
+        return reverse('accounts:team',args=[self.id])

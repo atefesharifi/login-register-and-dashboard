@@ -384,3 +384,20 @@ input {
   position: absolute;
   width: 1px;
 }
+
+/* otp-login */
+.doublecode {
+  width: 82px;
+  height: 23px;
+  margin: 20.5px 102px 1px 24px;
+  padding: 22px 39.5px 0 40.5px;
+  font-family: Vazir;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.14;
+  letter-spacing: normal;
+  text-align: right;
+  color: #06102e;
+}

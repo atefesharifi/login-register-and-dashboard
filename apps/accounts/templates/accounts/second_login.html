@@ -1,11 +1,66 @@
-{% extends 'base.html'%}
-{% block title %}{% endblock title %}
-{% block body %}
-    <h1>login</h1>
+{% extends 'base.html'%} {% load static %} {% block title %}{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'accounts/css/register.css' %}" />
+{% endblock %} {% block body %}
+<!-- <h1>login</h1>
     <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">login</button>
 
-    </form>
+    </form> -->
+
+
+<div class="sign-in-face-cup">
+  <div class="Rectangle-1">
+    <div class="grid-container" style="margin: 36px 36px">
+      <div class="pic">
+        <img src="/static/accounts/img/cover.png" class="cover" />
+      </div>
+      <div class="main">
+        <h2 class="lbl1">رمز یکبار مصرف</h2>
+        <div class="Line-12"></div>
+
+        <form action="" method="POST">
+          {% csrf_token %}
+
+          <div class="floating">
+            <input
+              name="code"
+              id="code"
+              class="floating__input"
+              type="text"
+              placeholder=" رمز عبور یکبار مصرف"
+            />
+            <label
+              for="input__username"
+              class="floating__label"
+              data-content=" رمز عبور یکبار مصرف "
+            >
+              <span class="hidden--visually"></span
+            ></label>
+            <div class="Line-2"></div>
+          </div>
+
+          <div id="register-link" class="">
+            <button type="submit" class="Rectangle-2">
+              <span class="lbl7"> وارد شوید </span>
+            </button>
+          </div>
+          <div>
+            
+        </form>
+        <div>
+            <a
+              class="lineshow"
+              href="{% url 'accounts:duplicate' pk %}"
+              class="doublecode"
+              >ارسال مجدد کد</a
+            >
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock body %}
