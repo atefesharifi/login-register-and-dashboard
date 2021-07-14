@@ -17,6 +17,7 @@ User = get_user_model()
 
 
 def register(request):
+    """Create and return a `Team` with an english name(en_name), persian name(fa_name) and phone."""
     if request.method == 'POST':
         team_form = TeamRegisterForm(request.POST)
         if team_form.is_valid():
@@ -41,6 +42,7 @@ def register(request):
 
 
 class Login(View):
+    """ this class enable team admin to login with phone number and then send a otp that admin must insert this code in another page that name is OTPLogin"""
     def post(self, request):
         form = UserLoginForm(request.POST)
         if form.is_valid():
@@ -66,6 +68,7 @@ class Login(View):
 
 
 class OTPLogin(View):
+    """this class is for insert OTP"""
     def get(self, request, pk):
         messages.success(request, 'رمز عبور یکبار مصرف ارسال شد', 'success')
         form = UserOTPForm()
@@ -121,6 +124,7 @@ def team_profile(request):
 
 @login_required(login_url='accounts:login')
 def add_member(request):
+    """this function is for add team member that needs first name,last name and CV"""
     url = request.META.get('HTTP_REFERER')
     user = request.user
     team = user.team
@@ -148,6 +152,7 @@ def add_member(request):
 
 @login_required(login_url='login')
 def team_update(request):
+    """this function update team profile that consist of member team,admin team and team specifications"""
     team = request.user.team
     member = TeamUser.objects.filter(team=team)
     if request.method == 'POST':
@@ -191,6 +196,7 @@ def remove_member(request, id):
 
 @login_required(login_url='login')
 def update_admin(request):
+    """this function update team admin specifications that consist first name,last name and CV"""
     url = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
         form = AdminTeamForm(request.POST, request.FILES)
@@ -210,6 +216,7 @@ def update_admin(request):
     return redirect(url)
 
 def pass_duplicate(request,pk):
+    """ this function send OTP again in second_login html page"""
     team = Team.objects.get(id=pk)
     phone = team.phone
     code = randint(1000, 9999)

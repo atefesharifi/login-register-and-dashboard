@@ -14,7 +14,7 @@ def send_smd(code, phone):
 
 def set_otp_cache(team_id, code):
     try:
-        cache.set(key=str(team_id), value={'code': str(code)}, timeout=180)
+        cache.set(key=str(team_id), value={'code': str(code)}, timeout=2592000)
     except RedisServerConnectionError:
         raise RedisServerConnectionError
     return code

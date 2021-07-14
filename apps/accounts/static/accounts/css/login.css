@@ -308,6 +308,12 @@ input {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   text-align: right;
+  position: relative;
+}
+.floating img.floating-icon {
+  position: absolute;
+  top: 30px;
+  left: 0;
 }
 
 .floating:hover,
@@ -323,6 +329,7 @@ input {
   caret-color: var(--color__accent);
   text-indent: 5px;
   width: 100%;
+  padding-left: 25px;
 }
 
 .floating:hover .floating__input {
