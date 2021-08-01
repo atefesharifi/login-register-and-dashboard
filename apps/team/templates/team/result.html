@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'team/base.html' %}
+{% load static %}
+{% block title %}نتایج{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'team/css/result.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static "team/css/flipdown.css" %}">
+    <script type="text/javascript" src="{% static "team/js/result/flipdown.js" %}"></script>
+    <script type="text/javascript" src="{% static "team/js/result/main.js" %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="wrapper">
+        <div id="flipdown" class="flipdown"></div>
+    </div>
+{% endblock %}

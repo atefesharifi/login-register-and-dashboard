@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "team/base.html" %}
+{% load static %}
+{% block title %} خانه {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "team/css/home.css" %}">
+{% endblock %}
+{% block content %}
+    <h2>سلام تیم {{ team.fa_name }} عزیز</h2>
+    <p class="description">شما میتوانید پس از تکمیل ثبت نام در قسمت پروفایل، فایل‌های راهنما و داده‌های نمونه را دانلود
+        کنید. پس از نهایی
+        سازی کدهای خود تا تاریخ ۱۵ بهمن ماه فرصت دارید که فایل‌های موتور خود را در قالب داکر با فرمت مشخص شده در بخش
+        قوانین فنی از طریق بخش ارسال کد ارسال فرمایید. تا قبل از ساعت ۲۴ تاریخ روز ۱۴ بهمن ماه ۱۴۰۰ می‌توانید به دفعات
+        کد خود را حذف و ویرایش نمایید. ولی در این تاریخ دسترسی بسته خواهد. شد و آخرین کد شما جهت ارزیابی با داده‌های
+        واقعی روی سیستم مشخص شده اجرا و نتایج آن مورد ارزیابی قرار می‌گیرد. پس از بررسی تمامی کدهای ارسال شده تمامی
+        تیم‌ها، نتایج تیم شما از طریق دکمه مشاهده نتایج رتبه‌بندی قابل دسترس خواهد بود. همچنین جهت دریافت گواهی شرکت در
+        مسابقه و گواهی رتبه نیز در تاریخ مشخص شده می‌توانید به قسمت نتایج پنل کاربری مراجعه فرمایید</p>
+    <div style="display: flex">
+        <div class="specifications">
+            <span>مشخصات سیستم مورد استفاده برای مسابقات:</span>
+            <div class="specifications-table">
+                <div>
+                    <img src="{% static "team/img/home/cpu.svg" %}" alt="">
+                    <p>Core i7 3.2GHz</p>
+                </div>
+                <div>
+                    <img src="{% static "team/img/home/gpu.webp" %}" alt="">
+                    <p>Geforce 1080</p>
+                </div>
+                <div>
+                    <img src="{% static "team/img/home/ram.svg" %}" alt="">
+                    <p>16G</p>
+                </div>
+            </div>
+            <p style="color: #6c6c76;font-size: 15px;margin-top: 100px">جهت آشنایی با قوانین فنی و نحوه استفاده از
+                داکرها
+                کلیک کنید</p>
+        </div>
+        <div class="video">
+
+        </div>
+    </div>
+{% endblock %}

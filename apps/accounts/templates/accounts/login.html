@@ -1,104 +1,61 @@
-{% extends 'base.html' %} {% load static %} {% block script %} {% load static %}
-<script src=""></script>
-{% endblock %} {% block css %}
-<link rel="stylesheet" href="{% static 'accounts/css/login.css' %}" />
-{% endblock %} {% block title %} {% endblock title %} {% block body %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>ورود</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body dir="rtl">
+<div class="login-face-cup d_flex">
+    <div class="d_flex content">
+        <div class="register-image"></div>
+        <div class="login-form">
+            <h2 class="title">ورود</h2>
+            <div class="line"></div>
+            <form action="{% url 'accounts:login' %}" method="POST" class="login-form">
+                {% csrf_token %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        <div class="info otp-warning" id="hideMeWarning">
+                            {{ msg }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="login-input">
+                    <input type="text" name="en_name" maxlength="23" required="" id="id_en_name" placeholder=" "
+                           autocomplete="off">
+                    <span>نام کاربری (نام لاتین تیم)</span>
+                    <img id="en_name_img" src="{% static 'accounts/img/email icon.png' %}" alt="">
+                </div>
 
-<!-- <div flex>
-  <div>
-    img
-  </div>
-  <div form>
-    <div>
-      <span>TEXT</span>
+                {#                <input type="checkbox" name="remember_me" id="id_remember_me">#}
+                {#                <span>مرا بخاطر بسپار</span>#}
+
+                <button type="submit" class="login-btn">
+                    <span>وارد شوید</span>
+                </button>
+            </form>
+            <span>هنوز حساب کاربری ندارید؟ <a href="{% url 'accounts:register' %}">ثبت نام کن</a></span>
+        </div>
+
     </div>
-    <div>
-      <form>
-        <div>
-          input
-        </div>
-        <div>
-          input
-        </div>
-        <div>
-          <button></button>
-        </div>
-        <div>
-          span
-          span
-        </div>
-      </form>
-    </div>
-  </div>
-</div> -->
 
-<div class="log-in-face-cup">
-  <div class="Rectangle-1">
-    <div class="cover-background">
-      <div class="main">
-        <h2 class="lbl1">ورود</h2>
-        <div class="Line-12"></div>
-
-        <form action="{% url 'accounts:login' %}" method="POST">
-          {% csrf_token %}
-
-          <!-- <div class="form-group">
-            <input
-              type="text"
-              style="border: none"
-              name="en_name"
-              id="en_name"
-              class="form-control"
-              dir="rtl"
-              placeholder="نام کاربری ..."
-            />
-          </div> -->
-          <div class="floating">
-            <input
-              name="en_name"
-              id="en_name"
-              class="floating__input"
-              type="text"
-              placeholder="نام کاربری (نام لاتین تیم)"
-            />
-            <label
-              for="input__username"
-              class="floating__label"
-              data-content="نام کاربری (نام لاتین تیم)  "
-            >
-              <span class="hidden--visually"></span
-            ></label>
-            <div class="Line-2"></div>
-            <img
-              class="floating-icon"
-              src="/static/accounts/img/email icon.png"
-            />
-          </div>
-
-          <br />
-
-          <div class="btngradiant">
-            <button class="Rectangle-2" type="submit">
-              <span class="lbl5"> وارد شوید </span>
-            </button>
-          </div>
-        </form>
-
-        <div style="text-align: center">
-          <!-- <span class="lbl6">رمز عبور خود را فراموش کرده‌اید؟ </span> -->
-          <span class="lbl7"> هنوز حساب کاربری ندارید؟ </span>
-          <a class="lineshow" href="{% url 'accounts:register' %}" class="lbl8"
-            >ثبت نام کن
-          </a>
-        </div>
-      </div>
-
-      <img
-        src="/static/accounts/img/cover.png"
-        style="padding: 0px 25px 25px 25px; margin: 0 0 0 150px"
-      />
-    </div>
-  </div>
 </div>
+<script src="{% static 'accounts/js/jquery.min.js' %}"></script>
+<script>
+    $(function () {
 
-{% endblock body %}
+        $("#id_en_name").focus(function () {
+            $("#en_name_img").hide();
+
+        }).blur(function () {
+            $("#en_name_img").show();
+        });
+
+    });
+</script>
+</body>
+</html>

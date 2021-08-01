@@ -6,5 +6,8 @@ class Sponsor(models.Model):
     logo = models.ImageField(upload_to='media\logo')
     kind = models.CharField(max_length=50)
 
+    class Meta:
+        db_table = "Sponsor"
+
     def __str__(self):
         return self.s_name

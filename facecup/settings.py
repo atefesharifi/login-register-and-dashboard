@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Local Apps 
-    'apps.home',
+    # Local Apps
     'apps.accounts',
-    
+    'apps.team',
+
     # Third-Party Apps
 ]
 
@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'facecup.wsgi.application'
 
 DATABASES = {
 
-       "default": {
+    "default": {
         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
         "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
         "USER": os.environ.get("SQL_USER", "user"),
@@ -143,5 +143,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

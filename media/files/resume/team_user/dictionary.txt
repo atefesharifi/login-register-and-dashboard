@@ -1,0 +1,1024 @@
+create app in apps:
+create file with app name in apps.
+startapp appname app/appname
+.........................................................................
+@admin.register(Person)
+class PersonAdmin(admin.ModelAdmin):
+
+    list_display = ['first_name', 'last_name', 'phone_number', 'gender']
+    list_display_links = ('first_name', 'last_name')
+    readonly_fields = ['created']
+	.................................................................
+class and function view:
+views:
+from django.views import View
+class ShowAll(View):
+    def get(self, request):
+        persons = Person.objects.all()
+        return render(request, 'person/show_all.html', {'persons': persons})
+
+
+def show_all(request):
+    if request.method == 'Get':
+        persons = Person.objects.all()
+        return render(request, 'person/show_all.html', {'persons': persons})
+		
+urls:
+path('showall/', views.ShowAll.as_view())
+path('showall/', views.show_all)
+#....................................................................................
+query parametr
+
+in vew:
+page = request.GET.get('page')
+print(int(page)+10) 
+postman url: 
+http://127.0.0.1:8000/person/person_list?page=10&p=10&......
+#..............................................................................
+@csrf_exempt
+@require_http_methods(['GET', 'POST'])
+def show_all(request):
+    if request.method == 'GET':
+        persons = Person.objects.all()
+        return render(request, 'person/show_all.html', {'persons': persons})
+    if request.method == 'POST':
+        persons = Person.objects.all()
+        return render(request, 'person/show_all.html', {'persons': persons})
+
+    if request.method == 'DELETE':
+        persons = Person.objects.all()
+        return render(request, 'person/show_all.html', {'persons': persons})
+
+slug:.............................................
+in model:slug = models.SlugField(null=False, unique=True)
+in admin panel: prepopulated_fields = {'slug': ('title',)}
+.......................................................................
+@register.simple_tag(takes_context=True)
+def current_time(context):
+    timezone = context['person']
+    return timezone.email
+	
+............................................................................
+for restframewor:
+1.pip install djangorestframework
+2.INSTALLED_APPS----># third parties
+					'rest_framework',
+					
+3.sample for view :
+class AllRest(APIView):
+    def get(self, request):
+        persons = Person.objects.all()
+        data = {'result': list(persons.values('first_name', 'last_name'))}
+        return JsonResponse(data)
+		
+4.simple for url:
+    path('person_list/allrest/', views.AllRest.as_view(), name='detail'),
+.........................................................................
+persian in slug:
+in model:
+
+from django.utils.text import slugify
+from django_extensions.db.fields import AutoSlugField
+from django.utils.text import slugify
+befor model cass:
+def my_slugify_function(content):
+    return slugify(content, allow_unicode=True)
+in model class:
+
+slug = AutoSlugField(populate_from=['name'], unique=True, allow_unicode=True,
+                         slugify_function=my_slugify_function)
+in url:
+re_path('person_list/(?P<slug>[-\w]+)/', views.detail, name='detail'),
+
+..............................................................................
+from django.views.generic import TemplateView
+
+urlpatterns = [
+    path('', TemplateView.as_view(template_name='tepmlates_app/base.html'))
+]
+
+example for template view:
+class LatestLoan(TemplateView):
+    template_name = 'loan/latest_loan.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['latest_loan'] = Loan.objects.all().order_by('-id')[:2]
+        return context
+		
+template for it:
+{% for loan in latest_loan %}
+            <li> {{ loan }}</li>
+{% endfor %}
+.............................................................................
+comma for mony:
+in setting--> INSTALLED APP--> 'django.contrib.humanize'
+in html-->{% load humanize %},{{ loan.amount|intcomma }}
+............................................................................
+url for admin:
+href="/admin/"
+href="{% url 'admin:index' %}"
+............................................................................
+sample for Form:
+forms.py:
+from django import forms
+from django.forms import ModelForm
+class RegisterPerson(ModelForm):
+    class Meta:
+        model = Person
+        fields = '__all__'
+		  
+ ************OR********* 
+		  
+class RegisterPerson(forms.Form):
+    first_name = forms.CharField(label='first_name', max_length=30)
+    last_name = forms.CharField(label='last_name', max_length=60)
+    national_code = forms.CharField(label='national_code', max_length=10, )
+    phone_number = forms.CharField(label='phone_number', max_length=11)
+    GENDER_CHOICES = [('F', 'female'), ('M', 'male')]
+    gender = forms.ChoiceField(label='gender', choices=GENDER_CHOICES)
+view:
+from .models import Person
+from .forms import RegisterPerson
+from django.http import 
+class Register(View):
+    def get(self, request):
+        form = RegisterPerson()
+        return render(request, 'person/register_person.html', {'form': form})
+
+    def post(self, request):
+        form = RegisterPerson(request.POST)
+        if form.is_valid():
+            person = Person(first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'],
+                            national_code=form.cleaned_data['national_code'], phone_number=form.cleaned_data['phone_number'],
+                            gender=form.cleaned_data['gender'])
+			# **** or person = Person(**form.cleaned_data) ******
+			********or form.save()
+            person.save()
+            return HttpResponseRedirect('/thanks/')
+        return render(request, 'person/register_person.html', {'form': form})
+template:
+
+        <input type="submit" value="ثبت" class="blue_btn">
+....................................................................
+over ride save to check validations:
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super(Person, self).save(*args, **kwargs)
+		
+put this in your model class
+..............................................
+from django.shortcuts import render, redirect
+return redirect('thanks')#thanks name of template in TemplateView
+................................................
+Form Validation :
+forms.Form :
+class RegisterPerson(forms.Form):
+    first_name = forms.CharField(label='first_name', max_length=30)
+    last_name = forms.CharField(label='last_name', max_length=60)
+    national_code = forms.CharField(label='national_code', max_length=10, )
+    phone_number = forms.CharField(label='phone_number', max_length=11)
+    GENDER_CHOICES = [('F', 'female'), ('M', 'male')]
+    gender = forms.ChoiceField(label='gender', choices=GENDER_CHOICES)
+
+    def clean_national_code(self):
+        data = self.cleaned_data['national_code']
+        if data == '0000000000':
+            raise ValidationError('Invalid National code')
+
+    def clean(self):
+        cleaned_data = super().clean()
+        f_name_lan = TextBlob(cleaned_data.get('first_name')).detect_language()
+        l_name_lan = TextBlob(cleaned_data.get('last_name')).detect_language()
+        if f_name_lan != l_name_lan:
+            raise ValidationError('first name and last name must be in same language')
+			
+Model Form:			
+class RegisterPerson(ModelForm):
+    class Meta:
+        model = Person
+        fields = '__all__'
+
+    def clean(self):
+        cleaned_data = super(RegisterPerson, self).clean()
+        national_code = cleaned_data.get('national_code')
+        f_name_lan = TextBlob(cleaned_data.get('first_name')).detect_language()
+        l_name_lan = TextBlob(cleaned_data.get('last_name')).detect_language()
+        if f_name_lan != l_name_lan:
+            raise ValidationError('first name and last name must be in same language')
+
+        if national_code == '0000000000':
+            raise ValidationError('In Valide national code')
+        return cleaned_data
+.............................................................................
+dynamic filtering:
+re_path('special-loan/(?P<slug>[-\w]+)/', views.SpecialLoan.as_view(), name='special-loan'),
+class SpecialLoan(ListView):
+
+    def get_queryset(self):
+        member = get_object_or_404(Person, slug=self.kwargs['slug'])
+        return Loan.objects.filter(members=member)
+		
+		
+..............................................................................
+when use middle table for many to many filds with throu in model in admin dont show it for this
+must use in line :
+in loan :members = models.ManyToManyField('person.Person', through=LoanMember, related_name='loan_member')
+
+in loan admin:
+class LoanMemberInline(admin.TabularInline):
+    model = LoanMember
+    extra = 1
+
+
+@admin.register(Loan)
+class LoanAdmin(admin.ModelAdmin):
+    inlines = (LoanMemberInline,)
+	....
+................................................................
+start id from 100:
+        def save(self, *args, **kwargs):
+        if self.id is None:
+            if not Loan.objects.count():
+                self.id = 100
+            else:
+                self.id = Loan.objects.last().id + 1
+            super(Loan, self).save(*args, **kwargs)
+        else:
+            super(Loan, self).save(*args, **kwargs)
+.................................................................
+SERIALYZER:
+bad :
+def person_list_to_file():
+    with open('persons.txt', 'a', encoding="utf-8") as f:
+        persons = str(Person.objects.all())
+        f.write(persons)
+first without serializer :
+from django.core.serializers.json import DjangoJSONEncoder
+def person_list_to_file():
+    with open('persons.txt', 'a', encoding="utf-8") as f:
+        persons = Person.objects.values()
+        for person in persons:
+            json.dump(person, f, cls=DjangoJSONEncoder)
+			
+serializer:
+from django.core.serializers import serialize
+def person_list_to_file():
+    serialized_person_list = serialize('json', Person.objects.all())
+    with open('persons.txt', 'a', encoding="utf-8") as f:
+        f.write(serialized_person_list)
+		
+determine fileds:
+
+def person_list_to_file():
+    serialized_person_list = serialize('json', Person.objects.all(),
+                                       fields=['first_name', 'last_name', 'national_code'])
+    with open('persons.txt', 'a', encoding="utf-8") as f:
+        f.write(serialized_person_list)
+		
+		
+		
+serializer in app with url:
+url:path('seialized_person/', views.PersonSerializer.as_view(), name='seialized_person'),
+views.py:
+class PersonSerializer(View): 
+    def get(seld, request):
+        serialized_person_list = serialize('json', Person.objects.all())
+        return HttpResponse(serialized_person_list,content_type='application/json')
+
+
+deserialized:
+def deserialize_person():
+    with open('persons.txt', 'r', encoding="utf-8") as f:
+        deserialize_data = deserialize('json', f.readlines()[0])
+        for data in deserialize_data:
+            print(data.object.first_name)
+********OR*********:
+def deserialize_person():
+    serialized_person_list = serialize('json', Person.objects.all())
+    deserialize_data = deserialize('json', serialized_person_list)
+    for data in deserialize_data:
+        print(data.object.first_name)
+...........................................................................
+from apps.snippets.models import Snippet
+obj = Snippet.objects.get(pk = 1)
+from apps.snippets.serializers import SnippetSerializer
+serialized= SnippetSerializer(obj)
+serialized.data # data of serialized
+..............................................................................
+obj_2={'id': 1, 'title': 'snipet1', 'code': 'def test():\r\n    code;', 'linenos': False, 'language': 'python', 'style': 'paraiso-dark'}
+s=SnippetSerializer(data=obj_2)
+s.is_valid()
+........................................................................
+............................................................
+serializers.py:
+from rest_framework import serializers
+class SnippetSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    title = serializers.CharField(required=False, allow_blank=True, max_length=100)
+    code = serializers.CharField(style={'base_template': 'textarea.html'})
+    linenos = serializers.BooleanField(required=False)
+    language = serializers.ChoiceField(choices=LANGUAGE_CHOICES, default='python')
+    style = serializers.ChoiceField(choices=STYLE_CHOICES, default='friendly')
+
+    def create(self, validated_data):
+        """
+        Create and return a new `Snippet` instance, given the validated data.
+        """
+        return Snippet.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        """
+        Update and return an existing `Snippet` instance, given the validated data.
+        """
+        instance.title = validated_data.get('title', instance.title)
+        instance.code = validated_data.get('code', instance.code)
+        instance.linenos = validated_data.get('linenos', instance.linenos)
+        instance.language = validated_data.get('language', instance.language)
+        instance.style = validated_data.get('style', instance.style)
+        instance.save()
+        return instance
+
+
+class SnippetModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Snippet
+        fields=['id','title']
+...............................................................
+........................................................................
+from rest_framework.views import APIView
+from django.http import HttpResponse, JsonResponse
+
+class SnippetDetail(APIView):
+    def get(self, request):
+        obj_1 = Snippet.objects.get(pk=1)
+        serialized = SnippetSerializer(obj_1)
+        print(serialized)
+        return JsonResponse(serialized.data)
+
+    def post(self, request):
+        data = request.data
+        serializer = SnippetSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            print(serializer.validated_data)
+            serializer.save()
+        return HttpResponse(status=200)
+
+
+class SnippetAll(APIView):
+    def get(self, request):
+        obj = Snippet.objects.all()
+        serialized = SnippetSerializer(obj, many=True)
+        return JsonResponse(serialized.data,safe=False)
+		
+		
+
+.......................................................
+urlpatterns = [
+    path('snippet_detail/', SnippetDetail.as_view(), name='snippet_detail'),
+    path('snippet_all/', SnippetAll.as_view(), name='snippet_all')
+
+]
+.......................................................
+EXERSICE SERIALYZER:
+class LoanSerial(APIView):
+    def get(self, request, loan_id_serialize):
+        loan = get_object_or_404(Loan, pk=loan_id_serialize)
+        serialized = LoanSerializer(loan)
+        return JsonResponse(serialized.data)
+
+
+class PersonInLoanSerializer(APIView):
+    def get(self, request, loan_id):
+        person = Person.objects.filter(loan=loan_id)
+        serialized = PersonSerializer(person, many=True)
+        return JsonResponse(serialized.data, safe=False)
+...............................................................................
+		
+extra field in SERIALYZER:
+class InstallmentSerializer(serializers.ModelSerializer):
+    day_of_payment_display_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Installment
+        fields = ['person_id', 'loan_id', 'date_of_payment', 'day_of_payment_display_name']
+
+    def get_day_of_payment_display_name(self, obj):
+        return timestamp_to_datetime(obj.date_of_payment)
+
+view:
+class InstallmentsAPIView(APIView):
+    def get(self, request):
+        installments = Installment.objects.all()
+        serializer = InstallmentSerializer(installments, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+.................................................................
+USE JALALi:
+for admin:https://stackoverflow.com/questions/20282610/how-can-i-change-type-of-django-calendar-with-persian-calendar
+from datetime import datetime
+from common.jalali import Gregorian
+
+
+def timestamp_to_datetime(timestamp):  # timestamp is BigInteger
+    dt_object = datetime.fromtimestamp(timestamp)
+    new_date = str(dt_object).split(" ")
+    return Gregorian(new_date[0]).persian_string().replace("-", "/") + " " + new_date[1]
+............................................................................
+get parametr:
+in django:
+size = request.GET.get('size') #size in url ?size=20
+in rest:
+name_filter = request.query_params.get('Name', None)
+
+
+
+class ShowAll(View):
+    def get(self, request):
+        try:
+            size = request.GET.get('size')
+            persons = Person.objects.all()[:int(size)]
+        except TypeError:
+            persons = Person.objects.all()
+        return render(request, 'person/show_all.html', {'persons': persons})
+.......................................................................................
+filter:
+http://127.0.0.1:8000/person/filter_person/?Name=ali&nc=5596622338
+class FilterPerson(APIView):
+    def get(self, request):
+        name_filter = request.query_params.get('Name', None)
+        national_code_filter = request.query_params.get('nc', None)
+        if name_filter:
+            result = Person.objects.filter(first_name=name_filter)
+        else:
+            result = Person.objects.all()
+        if national_code_filter:
+            result = result.filter(national_code=national_code_filter)
+        json_result = PersonSerializer(result, many=True)
+        return JsonResponse(json_result.data, safe=False)
+....................................................................................
+Q:
+from django.db.models import Q 
+people= Person.objects.filter(Q(first_name__contains=pattern)|Q(last_name__contains=pattern)|Q(national_code__contains=pattern)|
+Q(phone_number__contains=pattern)|Q(address__contains=pattern))
+...................................................................................
+paginator:
+my_list=[i for i in range(1,1000)]
+from django.core.paginator import Paginator
+paged_list=Paginator(my_list,9)
+paged_list.count
+999
+paged_list.num_pages
+111
+page_13= paged_list.page(13)
+page_13
+<Page 13 of 111>
+page_13.has_previous()
+True
+page_13.has_next()
+True
+page_13.next_page_number()
+14
+page_13.previous_page_number()
+12
+page_13.object_list
+[109, 110, 111, 112, 113, 114, 115, 116, 117]
+...........................................................................................
+paginator:
+VIEW:
+
+class AllPerson(ListView):
+    model = Person
+    paginate_by = 5
+TEMPLATE:
+
+{% for contact in page_obj %}
+    {# Each "contact" is a Contact model object. #}
+    {{ contact.full_name|upper }}<br>
+    ...
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+.......................................................................................
+Form with defult value:
+
+class Register(View):
+    def get(self, request, question_slug):
+        question = Question.objects.get(slug=question_slug)
+        form = AnswerForm(initial={'question': question})
+        return render(request, 'quiz/register_answer.html', {'form': form})
+
+    def post(self, request):
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = Answer(question=form.cleaned_data['question'], text=form.cleaned_data['text'], )
+
+            answer.save()
+            return HttpResponseRedirect('/Tanks/')
+        return render(request, 'quiz/register_answer.html', {'form': form})
+
+FILTER:
+1.pip install django-filter
+2.create filters.py in app
+3.in filters.py:
+import django_filters
+
+from apps.person.models import Person
+
+
+class PersonFilter(django_filters.FilterSet):
+    class Meta:
+        model = Person
+        fields = ['first_name', 'last_name', 'phone_number', 'gender']
+		
+4.VIEW:
+class FilterPerson(View):
+    def get(self, request):
+        p_filter = PersonFilter(request.GET, Person.objects.all())
+        return render(request, 'person/filter.html', {'filter': p_filter})
+		
+5.TEMPLATE:
+<form method="get">
+    <table>
+        {{ filter.form.as_table }}
+    </table>
+    <input type="submit">
+
+</form>
+<ul>
+    {% for person in filter.qs %}
+        <li>{{ person.first_name }}</li>
+    {% endfor %}
+</ul>
+
+....................................................................................
+DetailView:
+1.from django.views.generic import ListView,DetailView
+2.class TaskDetail(DetailView):
+    model = Task
+3.app_name/model_name_detail.html ---->object
+
+..................................................................................
+set filter to listview:
+class AllPerson(ListView):
+    model = Person
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = PersonFilter(self.request.GET, Person.objects.all())
+        paginator = Paginator(PersonFilter(self.request.GET, Person.objects.all()).qs, 5)
+        page_number = self.request.GET.get('page')
+        context['page_obj'] = paginator.get_page(page_number)
+        return context
+....................................................................................
+filter & tags:
+1.create package:templatetags
+2.create python file:custom_tags.py
+3.
+from django import template
+
+register = template.Library()
+
+
+@register.filter(name='sencase')
+def sencase(arg):
+    return arg.title()
+
+
+@register.simple_tag(name='numq')
+def numq(obs, word):
+    if len(obs) > 1 or len(obs) == 0:
+        word = word + 's'
+    return ' '.join([str(len(obs)), word])
+................................................................................
+add css & Html file:
+1.
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+2.
+create static file near manager.py
+3.create css file in it 
+4.use {% load static %} in first line in html
+5.<link rel="stylesheet" href="{% static  'css/main.css' %}">
+.................................................................................
+from django.utils.translation import ugettext_lazy as _
+..................................................................................
+null last django meta class:
+from django.db.models import F
+
+ordering = [F('author').asc(nulls_last=True)]
+....................................................................................
+when use custom method in class base view self has request and don`t get in:
+update form :
+class RegisterTaskView(View):
+
+    def get(self, request):
+        form = RegisterTask()
+        return render(request, 'todo/register_task.html', {'form': form})
+
+    def post(self, request):
+        form = RegisterTask(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/thanks/')
+        return render(request, 'todo/register_task.html', {'form': form})
+
+    def update(self, slug):
+        instance = get_object_or_404(Task, slug=slug)
+        form = RegisterTask(self.POST or None, instance=instance)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/thanks/')
+        return render(self, 'todo/register_task.html', {'form': form})
+		
+		
+..................................................................................
+create file downloadable:
+1.serialized = TaskSerializer(Task.objects.all(), many=True)
+        res = HttpResponse(serialized.data)
+        res['Content-Disposition'] = 'attachment; filename=json.txt'
+        return res
+2.serialized = TaskSerializer(Task.objects.all(), many=True)
+        return JsonResponse(serialized.data, safe=False, json_dumps_params={'ensure_ascii': False},
+                            content_type='application/octet-stream')
+.........................................................................................
+convert time of utc to locale:
+from django.utils.timezone import localtime 
+
+desired_datetime = localtime(stored_datetime)
+...................................................................................
+tag together:
+{% url 'settings' var1 var2 as action_url %}
+
+{% include "default_form.html" with action=action_url %}
+...........................................................................
+FilteredRelation is used with annotate() to create an ON clause when a JOIN is performed.
+ It doesn’t act on the default relationship but on the annotation name
+>>> from django.db.models import FilteredRelation, Q
+>>> Restaurant.objects.annotate(
+...    pizzas_vegetarian=FilteredRelation(
+...        'pizzas', condition=Q(pizzas__vegetarian=True),
+...    ),
+... ).filter(pizzas_vegetarian__name__icontains='mozzarella')
+	)
+https://docs.djangoproject.com/en/2.0/ref/models/querysets/#filteredrelation-objects
+join resturant with pizza 
+....................................................................
+release_year(name that show in django form) = django_filters.NumberFilter(field_name='release_date'()from wich filed, lookup_expr='year')
+    release_year__gt = django_filters.NumberFilter(field_name='release_date', lookup_expr='year__gt')
+    release_year__lt = django_filters.NumberFilter(field_name='release_date', lookup_expr='year__lt')
+...................................................................
+for validation :
+1.create package common in root 
+2.create validators.py in it
+3. validators.py example:
+from django.core.exceptions import ValidationError
+
+def mobile_validator(mobile):
+    if mobile[0:2] != '09':
+        raise ValidationError('Please follow the mentioned format')
+
+4.model.py example:
+phone_number = models.CharField('phone_number', max_length=11,
+                                    validators=[mobile_length_validator, mobile_validator, validate_not_empty],
+                                    help_text='Please use the follow format :<em>09- - - - - - - - -</em>')
+.....................................................................
+self join in django:
+following = models.ManyToManyField('self', verbose_name='follow', blank=True, symmetrical=False,
+                                       related_name='followers')→
+https://charlesleifer.com/blog/self-referencing-many-many-through/
+........................................................................
+location:
+1.pip install django-location-field
+2.Add location_field.apps.DefaultConfig to INSTALLED_APPS your settings.py file
+3.from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
+from location_field.models.spatial import LocationField
+
+class Place(models.Model):
+    city = models.CharField(max_length=255)
+    location = LocationField(based_fields=['city'], zoom=7, default=Point(1.0, 1.0))
+...........................................................................
+auto complete:
+1.url:path('user_autocomplete/', UserAutocomplete.as_view(), name='user_autocomplete')
+2.class UserAutocomplete(View):
+    def get(self, request):
+        if 'term' in request.GET:
+            qs = User.objects.filter(user_name__icontains=request.GET.get('term'))
+            search_result = []
+            for user in qs:
+                search_result.append(user.user_name)
+            return JsonResponse(search_result, safe=False)
+        return render(request, 'user/search.html')
+3.<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+<form action="">
+    <label for="autocomplete_user">users:</label>
+    <input type="text" name="autocomplete_user" id="autocomplete_user">
+</form>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+
+        $("#autocomplete_user").autocomplete({
+            source: '{% url 'user_autocomplete' %}'
+        });
+    });
+</script>
+</body>
+</html>
+.........................................................................
+request.Post (in view)= request.data in form
+........................................................................
+
+......................................................................
+accsess many to many field table
+through
+num = (Uer.follow  # M2M Manager
+               .through  # subjects_students through table
+               .objects  # through table manager
+               .filter(user_name='mahnaz.divargar')  # your query against through table
+               .count())
+			   
+add:
+foring key:post.like.add(user)
+many to many:c=Comment(person_id_id=u.id,post_id_id=p.id,content='خیلی زیبا بود')
+c.save()
+.....................................................................
+return string from view
+from django.http import JsonResponse
+
+def myview(request):
+    return JsonResponse({'mystring':"return this string"})
+.......................................................................
+back same link:
+a href="javascript:history.back()"
+in django:return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+..................................................................
+cache:
+https://docs.djangoproject.com/en/3.1/topics/cache/
+..................................................................
+authentication:
+from django.contrib.auth.models import  User
+u=User.objects.create_user('Ali','ali.alavi@gmail.com','Ali1376/01/28')
+User.objects.get(username__exact='Ali')
+u.set_password('ali1376/01/28')
+u.save()
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
+view:
+class Login(View):
+    def get(self, request):
+        return render(request, 'person/login.html')
+
+    def post(self, request):
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                message = ' login successfully'
+            else:
+                message = ' disable account'
+        else:
+            message = 'invalid username or password'
+        return render(request, 'person/login.html', {"message": message})
+		
+template:
+<form action="" method="post" style="direction: ltr">
+        {% if message %}
+            {{ message }}
+        {% endif %}
+        {% csrf_token %}
+        <label style="display: block">
+            username:<input type="text" name="username">
+        </label>
+        <label style="display: block">
+            Password:<input type="password" name="password">
+        </label>
+        <input type="submit">
+    </form>
+	
+logout:
+from django.contrib.auth import logout
+def logout(request):
+	logout(request)
+	
+	
+login required:
+
+1*
+from django.conf import settings
+from django.shortcuts import redirect
+
+def add_post(request):
+	if not request.user.is_authenticated:
+		return redirect('%s?next=%s'%(settings.LOGIN_URL,request.path))
+2*method view
+from django.contrib.auth.decorator import login_required
+@login_required(login_url='..')
+def ...		
+3*class view:
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+class AddPost(LoginRequiredMixin,View):
+	login_url='...'
+	redirect_field_name='redirect_to'
+
+*********************************************
+redis:
+
+search services in start
+redis must be started redis must be start
+
+in cmd:
+redis-cli 
+connect to redis
+
+pip install django-redis
+
+add to setting.py:
+CACHES = {
+'default': {
+'BACKEND': 'django_redis.cache.RedisCache',
+'LOCATION': "redis://localhost/3",
+'OPTIONS': {
+'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+}
+}
+}
+************************************************
+add inline to admin:
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
+from .models import Student, Teacher
+
+
+class StudentInline(admin.StackedInline):
+    model = Student
+    can_delete = False
+
+
+class TeacherInline(admin.StackedInline):
+    model = Teacher
+    can_delete = False
+
+
+class UserAdmin(BaseUserAdmin):
+    inlines = (StudentInline, TeacherInline)
+
+
+admin.site.unregister(User)
+admin.site.register(User,UserAdmin)
+...........................................................
+custom form in UserCreationForm:
+<form method="post" class="sign-up-form">
+
+        {% csrf_token %}
+        {% for field in form %}
+            <div style="margin:7px auto;width: 230px;">
+                {#                {% if field.help_text %}#}
+                {#                    <small style="color: grey;font-size: 11px">{{ field.help_text }}</small>#}
+                {#                {% endif %}#}
+                {% for error in field.errors %}
+                    <p style="color: red;font-size: 11px">{{ error }}</p>
+
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+                {{ field }}
+            </div>
+        {% endfor %}
+        {% if message %}
+            <span class="wrong">{{ message }}</span>
+        {% endif %}
+        <button type="submit" class="btn" style="margin-left: 25px">Sign up</button>
+
+    </form>
+	
+****************************************************************
+plural_translate:
+{% blocktrans count post.like.count as likes %}{{ likes }}like{% plural %}{{ likes }}likes{% endblocktrans %}
+*****************************************************************
+for signal:
+1.create signals.py in your app 
+2.in apps like this:
+class UserConfig(AppConfig):
+    name = 'apps.user'
+
+    def ready(self):
+        import apps.user.signals
+		
+3. in your app __init__.py add like this:
+	default_app_config = 'apps.user.apps.UserConfig'
+*************************************************************************
+django rest framwork:
+listcreateapiview: https://www.agiliq.com/blog/2019/05/django-rest-framework-listcreateapiview/
+
+*************************************************************************
+test:
+https://realpython.com/integration-testing-with-pyvows-and-django/
+loader.io
+
+************************************************************
+scrapy in python:
+https://docs.scrapy.org/en/latest/intro/overview.html
+view-source:http://cdn.tsetmc.com/Loader.aspx?ParTree=15131P&i=18063426072758458&d=20210412
+
+*************************************************************************************
+subquery:
+https://docs.djangoproject.com/en/3.2/ref/models/expressions/#avoiding-race-conditions-using-f
+subquery = transaction_in_range.filter(symbol=OuterRef('symbol_id'))
+symbols = transaction_in_range.values('symbol_id').order_by('symbol_id').annotate(
+	count=Count('symbol_id'),
+	first_day_floating_stock=Subquery(subquery.values('floating_stock').order_by('date')[:1]),
+	last_day_floating_stock=Subquery(subquery.values('floating_stock').order_by('-date')[:1]),
+
+)
+******************************************************************************
+upload image as api:
+serialize:
+class ImageSerializers(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Image
+        fields = ['id', 'estate', 'description', 'image']
+		
+		
+		
+class ImageUploadAPIView(CreateAPIView):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializers
+	
+hame chi mesle halate adie faghat toy postman baray por kardan body -->form data باشه 
+************************************************************************
+token base login:
+from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
+from apps.account.models.user import User
+1:
+class CustomLoginAPIView(NoAuthAPIView, APIView):
+    def post(self, request):
+        serializer = UserRegisterSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        try:
+            user = User.objects.get(mobile=serializer.data['username'])
+        except User.DoesNotExist:
+            raise NotMatchInformationError
+        if not user.check_password(serializer.data['password']):
+            raise NotMatchInformationError
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+        })
+		
+		
+		
+2.:
+class CustomLoginAPIView(NoAuthAPIView, APIView):
+    def post(self, request):
+        serializer = UserRegisterSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = authenticate(username=serializer.data['username'], password=serializer.data['password'])
+        if user is None:
+            raise NotMatchInformationError
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+        })
+******************************************************
+be atomic to do transaction:
+atomic transaction:
+use it as decorator:
+@transaction.atomic
+def put(self, request, *args, **kwargs):
+    return super().put(request, *args, **kwargs)

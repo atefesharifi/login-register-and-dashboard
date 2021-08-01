@@ -1,109 +1,102 @@
-{% extends 'base.html' %} {% load static %} {% block script %}
-<script src=""></script>
-{% endblock %} {% block css %}
-<link rel="stylesheet" href="{% static 'accounts/css/register.css' %}" />
-{% endblock %} {% block title %} {% endblock title %} {% block body %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>ثبت نام</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body dir="rtl">
+<div class="sign-in-face-cup d_flex">
+    <div class="d_flex content ">
+        <div class="register-form ">
+            <h2 class="title">ثبت نام</h2>
+            {% if messages %}
+                {% for msg in messages %}
+                    <div class="error-messages">{{ msg }}</div>
+                {% endfor %}
+            {% endif %}
+            <form action="{% url 'accounts:register' %}" method="POST" class="register-form-info">
+                {% csrf_token %}
+                <div class="register-input">
+                    <input type="text" name="en_name" maxlength="50" required="" id="id_en_name" placeholder=" "
+                           autocomplete="off">
+                    <span>نام تیم (لاتین)</span>
+                    <img id="en_name_img" src="{% static 'accounts/img/email icon.png' %}" alt="">
+                </div>
+                <p id="en_name_disc" class="disc">نام لاتین به‌عنوان نام کاربری شما جهت ورود به سیستم درنظر گرفته خواهد
+                    شد</p>
+                <div class="register-input">
+                    <input type="text" name="fa_name" maxlength="50" required="" id="id_fa_name" placeholder=" "
+                           autocomplete="off">
+                    <span>نام تیم (فارسی)</span>
+                    <img id="fa_name_img" src="{% static 'accounts/img/email icon.png' %}" alt="">
+                </div>
+                <div class="register-input">
+                    <input type="text" name="phone" maxlength="11" required="" id="id_phone"
+                           placeholder=" " autocomplete="off" class="disc">
+                    <span>شماره موبایل</span>
+                    <img id="phone_img" src="{% static 'accounts/img/mobile icon.png' %}" alt="">
+                </div>
+                <p id="phone_disc" class="disc">کدفعالسازی و احراز هویت به این شماره ارسال خواهد شد</p>
 
-<div class="sign-in-face-cup">
-  <div class="Rectangle-1">
-    <div class="grid-container" style="margin: 36px 36px">
-      <div class="pic">
-        <img src="/static/accounts/img/cover.png" class="cover" />
-      </div>
-      <div class="main">
-        <h2 class="lbl1">ثبت نام</h2>
-        <div class="Line-12"></div>
+                <p class="text" style="margin-top: 80px">شما با ثبت نام در فیس‌کاپ، <span class="bold">شرایط استفاده از خدمات </span>را
+                    می‌پذیرید
+                </p>
+                <button type="submit" class="register-btn">
+                    <span> ثبت نام</span>
+                </button>
+                <p class="text">قبلاً ثبت نام کرده‌اید؟<a href="{% url 'accounts:login' %}" class="bold">وارد شوید</a>
+                </p>
 
-        <form action="{% url 'accounts:register' %}" method="POST">
-          {% csrf_token %}
-          <div class="floating">
-            <input
-              name="en_name"
-              id="en_name"
-              class="floating__input"
-              type="text"
-              placeholder="نام کاربری (نام لاتین تیم)"
-            />
-            <label
-              for="input__username"
-              class="floating__label"
-              data-content="  نام کاربری (نام لاتین تیم)  "
-            >
-              <span class="hidden--visually"></span
-            ></label>
-            <div class="Line-2"></div>
-            <img
-              class="floating-icon"
-              src="/static/accounts/img/email icon.png"
-            />
-          </div>
+            </form>
 
-          <div class="floating">
-            <input
-              name="fa_name"
-              id="fa_name"
-              class="floating__input text-right"
-              type="text"
-              placeholder="نام تیم (فارسی)"
-            />
-            <label class="floating__label" data-content="نام تیم (فارسی)  ">
-              <span class="hidden--visually"></span
-            ></label>
-            <div class="Line-2"></div>
-            <img
-              class="floating-icon"
-              src="/static/accounts/img/email icon.png"
-            />
-          </div>
-
-          <div class="floating">
-            <input
-              name="phone"
-              id="phone"
-              class="floating__input"
-              type="text"
-              placeholder="شماره موبایل"
-            />
-            <label
-              for="input__username"
-              class="floating__label"
-              data-content="شماره موبایل "
-            >
-              <span class="hidden--visually"></span
-            ></label>
-            <div class="Line-2"></div>
-            <img
-              class="floating-icon"
-              src="/static/accounts/img/email icon.svg"
-            />
-          </div>
-
-          <div id="register-link" class="">
-            <span class="lbl5"
-              >شما با ثبت نام در فیس‌کاپ،
-              <span class="lbl6">شرایط استفاده از خدمات</span> را
-              می‌پذیرید</span
-            >
-
-            <button type="submit" class="Rectangle-2">
-              <span class="lbl7"> ثبت نام</span>
-            </button>
-            <div id="register-link" class="">
-              <span class="lbl8"></span>
-              <div>
-                قبلاً ثبت نام کرده‌اید؟
-                <a
-                  class="lineshow"
-                  href="{% url 'accounts:login' %}"
-                  class="lbl9"
-                  >وارد شوید</a
-                >
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div class="register-image"></div>
     </div>
-  </div>
 </div>
-{% endblock body %}
+<script src="{% static 'accounts/js/jquery.min.js' %}"></script>
+<script>
+    $(function () {
+
+        $("#id_en_name").focus(function () {
+            $("#en_name_disc").show();
+            $("#en_name_img").hide();
+            $("#id_en_name").attr("placeholder", "تنها حروف و فاصله مجاز است");
+        }).blur(function () {
+            $("#en_name_disc").hide();
+            $("#en_name_img").show();
+            $("#id_en_name").attr("placeholder", " ");
+        });
+
+    });
+    $(function () {
+
+        $("#id_fa_name").focus(function () {
+            $("#fa_name_img").hide();
+        }).blur(function () {
+            $("#fa_name_img").show();
+        });
+
+    });
+    $(function () {
+
+        $("#id_phone").focus(function () {
+            $("#phone_disc").show();
+            $("#phone_img").hide();
+            $("#id_phone").attr("placeholder", "مثال: 09121234567");
+        }).blur(function () {
+            $("#phone_disc").hide();
+            $("#phone_img").show();
+            $("#id_phone").attr("placeholder", " ");
+        });
+
+    });
+</script>
+</body>
+</html>

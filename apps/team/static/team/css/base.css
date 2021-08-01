@@ -1,0 +1,108 @@
+body{
+    background-color: #F5F5F5;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    padding: 16px 55px 30px 150px;
+    box-shadow: 0 3px 6px 0 rgba(103, 102, 102, 0.64);
+    background-color: #292d84;
+    border-top-right-radius: 28px;
+}
+
+
+.team {
+    width: 200px;
+    height: 38px;
+    padding: 5px 0 0;
+    border-radius: 28px;
+    background-color: #9c1ae1;
+    font-size: 14px;
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+}
+
+.team ul {
+    display: none;
+    margin: 0 0;
+    list-style: none;
+    padding-right: 0;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+    background-color: #9c1ae1;
+}
+
+.menu-icon {
+    background-image: url("../img/base/open small.png");
+    width: 18px;
+    height: 14px;
+    display: inline-block;
+    position: absolute;
+    right: 10%;
+    top: 30%;
+}
+
+
+.team:hover > ul {
+    transition-delay: 5s;
+    display: block;
+    margin-top: 10px;
+}
+
+.team:hover {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.team:hover .menu-icon {
+    background-image: url("../img/base/close small.png");
+}
+
+.team ul li {
+    padding: 7px 0;
+}
+
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    margin: 0 0 0 32px;
+    border-bottom-right-radius: 28px;
+    border-bottom-left-radius: 28px;
+    background-image: linear-gradient(2deg, #9d1ae2 0%, #292d84 91%);
+    padding: 60px 10px 20px;
+    display: inline-block;
+}
+
+.sidebar .list {
+    list-style: none;
+    margin: 0 0;
+    padding: 0 0;
+}
+
+.list span {
+    text-align: right;
+    color: #ffffff;
+    font-size: 15px;
+    margin-right: 20px;
+}
+
+.list li {
+    width: 160px;
+    height: 40px;
+    margin: 16px 0;
+    padding: 2px 14px 2px 14px;
+}
+
+#last-ul {
+    position: absolute;
+    bottom: -50px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+
+}
+

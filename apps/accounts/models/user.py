@@ -1,14 +1,20 @@
+import os
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.files.storage import FileSystemStorage
+from apps.team.models.team import Team
+from facecup import settings
 
-from apps.accounts.models.team import Team
+RESUME_FILE_PATH = 'files/resume/admins'
 
 
 class User(AbstractUser):
-    
     team = models.OneToOneField(Team, on_delete=models.CASCADE, null=True, related_name='uteam')
-    file_resume = models.FileField(upload_to='media/resume/', null=True)
-    code = models.FileField(upload_to='media/code/', null=True)
+    file_resume = models.FileField(upload_to=RESUME_FILE_PATH, null=True)
+
+    class Meta:
+        db_table = 'User'
 
     def __str__(self):
         return str(self.first_name)

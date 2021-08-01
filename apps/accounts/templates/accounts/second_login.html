@@ -1,79 +1,73 @@
-{% extends 'base.html'%} {% load static %} {% block title %}{% endblock title %}
-{% block css %}
-<link rel="stylesheet" href="{% static 'accounts/css/register.css' %}" />
-{% endblock %} {% block body %}
-<!-- <h1>login</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">login</button>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>فعال سازی</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/otp.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body dir="rtl">
+<div class="login-face-cup d_flex">
+    <div class="d_flex content">
+        <div class="otp-form">
+            <h2 class="title">رمز یکبار مصرف</h2>
 
-    </form> -->
 
+            <form action="" class="otp-form" method="POST">
+                <div class="otp_message">
+                    {% if messages %}
+                        {% for msg in messages %}
+                            {% if msg.tags == 'danger error' %}
+                                <div class="info otp-error" id="hideMeError">
+                                    کد وارد شده صحیح نیست
+                                </div>
+                            {% elif msg.tags == 'warning error' %}
+                                <div class="info otp-warning" id="hideMeWarning">
+                                    کد منقضی شده است
+                                </div>
+                            {% elif msg.level_tag == 'success' %}
+                                <div class="info otp-info" id="hideMeInfo">
+                                    رمز عبور یکبار مصرف به شماره <span class="phone-number">{{ phone_number }}</span>
+                                    ارسال
+                                    شد
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {% csrf_token %}
+                <div class="otp-input">
+                    <input type="text" name="code" maxlength="4" required="" id="id_code" placeholder=" "
+                           autocomplete="off">
+                    <span>رمز عبور یکبار مصرف</span>
+                    <img id="clock_img" src="{% static 'accounts/img/lock.png' %}" alt="">
+                </div>
+                <button type="submit" class="otp-btn">
+                    <span> ورود</span>
+                </button>
 
-<div class="sign-in-face-cup">
-  <div class="Rectangle-1">
-    <div class="grid-container" style="margin: 36px 36px">
-      <div class="pic">
-        <img src="/static/accounts/img/cover.png" class="cover" />
-      </div>
-      <div class="main">
-        <h2 class="lbl1">رمز  عبور</h2>
-        <div class="Line-12"></div>
-
-        <form action="" method="POST">
-          {% csrf_token %}
-
-          <div class="floating">
-            <input
-              name="code"
-              id="code"
-              class="floating__input"
-              type="text"
-              placeholder=" رمز عبور  "
-            />
-            
-            <label
-            for="input__username"
-            class="floating__label"
-            data-content=" رمز عبور   "
-            >
-            
-            <span class="hidden--visually"></span
-              ></label>
-              <div class="Line-2"></div>
-              <img class="floating-icon" src="/static/accounts/img/password icon.svg">
-          </div>
-
-          <div class="checkbox-wrapper">
+            </form>
             <div>
-              <span class="lblremember">مرا بخاطر بسپار </span>
+                <a href="{% url 'accounts:duplicate' pk %}" class="link" style="margin-left: 15px">ارسال مجدد کد</a>
             </div>
-            <div>
-              <input class="myCheckbox1" type="checkbox" name="remember" />
-            </div>
-          </div>
-
-          
-          <div id="register-link" class="register-link">
-            <button type="submit" class="Rectangle-2">
-              <span class="lbl7"> ورود </span>
-            </button>
-          </div>
-          <div>
-            
-        </form>
-        <div>
-            <a
-              class="lineshow"
-              href="{% url 'accounts:duplicate' pk %}"
-              class="doublecode"
-              >ارسال مجدد کد</a
-            >
-          </div>
-      </div>
+        </div>
+        <div class="register-image"></div>
     </div>
-  </div>
 </div>
+<script src="{% static 'accounts/js/jquery.min.js' %}"></script>
+<script>
+    $(function () {
 
-{% endblock body %}
+        $("#id_code").focus(function () {
+            $("#clock_img").hide();
+
+        }).blur(function () {
+            $("#clock_img").show();
+        });
+
+    });
+</script>
+</body>
+</html>

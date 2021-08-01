@@ -1,0 +1,230 @@
+/*General*/
+.d_flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Content*/
+.login-face-cup {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f6f6f6;
+}
+
+.content {
+    position: absolute;
+    top: 42px;
+    right: 42px;
+    bottom: 42px;
+    left: 42px;
+    background-color: #ffffff;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.register-image {
+    width: 627px;
+    height: 584px;
+    background-image: url("../img/cover.png");
+
+}
+
+.title {
+    font-family: Vazir;
+    font-size: 30px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    color: #06102e;
+    border-bottom: 2px solid #9b9b9b;
+}
+
+.info {
+    width: 412px;
+    height: 53px;
+    margin: 16px 0 40px;
+    padding: 12px 6px;
+    border-radius: 5px;
+    color: #707070;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 3px 6px 0 rgba(11, 8, 56, 0.1);
+}
+
+.otp-info {
+    background-color: #dff0d8;
+}
+
+.otp-error {
+    background-color: #FCCEE0;
+}
+
+.otp-warning {
+    background-color: #FDFEC2;
+}
+
+.otp_message {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone-number {
+    color: #2b2b7b !important;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+.otp-form {
+    width: 627px;
+    height: 412px;
+    display: flex;
+    margin-top: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.otp-btn {
+    width: 330px;
+    height: 48px;
+    margin: 120px 0 20px;
+    padding: 4px 111px 5px 130px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-image: linear-gradient(260deg, #16255f, #8f48ff);
+    transition: 0.3s;
+}
+
+.otp-btn:hover {
+    background-image: linear-gradient(#16255f, #16255f);
+}
+
+.otp-btn span {
+    width: 72px;
+    height: 39px;
+    font-family: Vazir;
+    font-size: 24px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+}
+
+
+.otp-input {
+    width: 400px;
+    margin: 35px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #6c6c76;
+}
+
+.otp-input span {
+    font-family: Vazir;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #6c6c76;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: 0.2s;
+    transition-timing-function: ease;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.otp-input input {
+    padding: 10px;
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.otp-input input:focus {
+    border-bottom: 1px solid #0068ff;
+}
+
+.otp-input img {
+    position: absolute;
+    left: 0;
+}
+
+.otp-input input:focus + span, input:not(:placeholder-shown) + span {
+    opacity: 1;
+    color: #0068ff;
+    transform: scale(0.75) translateY(-100%) translateX(10px);
+}
+
+/* For IE Browsers*/
+.otp-input input:focus + span, input:not(:-ms-input-placeholder) + span {
+    opacity: 1;
+    color: #0068ff;
+    transform: scale(0.75) translateY(-100%) translateX(10px);
+}
+
+.link {
+    font-family: Vazir;
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.14;
+    letter-spacing: normal;
+    text-align: right;
+    color: #06102e;
+}
+
+#hideMeInfo {
+    -webkit-animation: cssAnimation 2.5s forwards;
+    animation: cssAnimation 2.5s forwards;
+}
+
+#hideMeError {
+    -webkit-animation: cssAnimation 2.5s forwards;
+    animation: cssAnimation 2.5s forwards;
+}
+
+#hideMeWarning {
+    -webkit-animation: cssAnimation 2.5s forwards;
+    animation: cssAnimation 2.5s forwards;
+}
+
+@keyframes cssAnimation {
+    0% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes cssAnimation {
+    0% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 0;
+    }
+}

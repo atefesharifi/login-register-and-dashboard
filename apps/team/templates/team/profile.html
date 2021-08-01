@@ -1,10 +1,361 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'team/base.html' %}
+{% load static %}
+{% block title %}پروفایل{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'team/css/profile.css' %}">
+{% endblock %}
+{% block content %}
+    <h2>اطلاعات تیم</h2>
+    {#    {{ admin_form }}#}
+    <div class="profile_message">
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="info {% if msg.tags == 'warning error' %}otp-error{% else %}otp-info{% endif %}"
+                     id="hideMeInfo">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <form name="profile_form" class="profile-form" action="" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <div class="right-part">
+
+            <div class="profile-input">
+                <input type="text" name="en_name" maxlength="50" required="" id="id_en_name" placeholder=" "
+                       autocomplete="off" value="{{ team.en_name }}" readonly>
+                <span>نام تیم(لاتین)</span>
+            </div>
+            <div class="profile-input">
+                <input type="text" name="fa_name" value="{{ team.fa_name }}" maxlength="50" required="" id="id_fa_name"
+                       placeholder=" "
+                       autocomplete="off">
+                <span>نام تیم(فارسی)</span>
+            </div>
+            <div class="profile-input">
+                <input type="text" name="first_name" maxlength="20" value="{{ admin.first_name }}" required=""
+                       id="id_first_name" placeholder=" "
+                       autocomplete="off">
+                <span>نام سرگروه</span>
+            </div>
+            <div class="profile-input">
+                <input type="text" name="last_name" value="{{ admin.last_name }}" maxlength="25" required=""
+                       id="id_last_name" placeholder=" "
+                       autocomplete="off">
+                <span>نام خانوادگی سرگروه</span>
+            </div>
+            <div class="profile-input">
+                <input type="text" name="phone" value="{{ team.phone }}" maxlength="11" required="" id="id_phone"
+                       placeholder=" "
+                       autocomplete="off">
+                <span>شماره موبایل</span>
+            </div>
+        </div>
+        <div class="left-part">
+            <div class="d-flex" style="color: #6c6c76">
+                <span>رزومه سرگروه</span>
+                <div class="file-place" style="color: #6c6c76">
+                    <input type="file" name="file_resume" id="id_file_resume">
+                    <p id="file-p">برای انتخاب فایل کلیک کنید</p>
+                    <img src="{% static "team/img/profile/Icon metro-upload.png" %}" width="24px" alt="">
+                </div>
+            </div>
+            <span>
+                <a href="{% static "team/file/dotfile.dot" %}" download="dotfile.dot"
+                   style="color: #6c6c76;font-size: 12px;">برای دریافت فرمت رزومه کلیک کنید</a>
+            </span>
+
+
+            <button id="hidden-btn" type="submit" hidden>
+                <span> ثبت مشخصات</span>
+            </button>
+        </div>
+    </form>
+    <div class="wrapper">
+        <div style="width: 50%">
+            <div class="add-new-pre" style="color: #6c6c76;">
+                <span id="members-title"></span>
+                <div class="members">
+                    {% for team_member in members %}
+                        <div id="#member-{{ team_member.id }}" class="team-member">
+                            <span id="member_name">{{ team_member.first_name }} {{ team_member.last_name }}</span>
+                            <div class="image">
+                                <img class="ed-de-icon" src="{% static "team/img/profile/more.png" %}" width="18px"
+                                     height="18px" alt="">
+                                <div id="#edit-delete-{{ team_member.id }}" class="overlay edit-delete">
+                                    <div class="d-flex-col">
+                                        <a id="#edit-{{ team_member.id }}" class="edit"><span>ویرایش مشخصات</span></a>
+                                        <a id="#delete-{{ team_member.id }}" class="delete"><span>حذف</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <img class="add" src="{% static "team/img/profile/plus.png" %}" width="23px" height="23px" alt="">
+            </div>
+            <div id="add-new-team-member-form">
+                <div class="add-new">
+                    <span id="team-member-form-title"
+                          style="margin-bottom: 20px;background-color: #F5F5F5;">عضو جدید</span>
+                    <form id="add-team-member-from" enctype="multipart/form-data">
+                        <span class="info2 otp-error add_new_error_msg"></span>
+                        <div class="profile-input">
+                            <input type="text" name="first_name" maxlength="100" required=""
+                                   id="id_first_name" placeholder=" " autocomplete="off">
+                            <span>نام</span>
+                        </div>
+                        <div class="profile-input">
+                            <input type="text" name="last_name" maxlength="100" required=""
+                                   id="id_last_name" placeholder=" " autocomplete="off">
+                            <span>نام خانوادگی</span>
+                        </div>
+                        <div class="d-flex" style="color: #6c6c76">
+                            <span>رزومه</span>
+                            <div class="file-place" style="color: #6c6c76">
+                                <input type="file" name="file_resume" id="id_file_resume2">
+                                <p id="file-p2">برای انتخاب فایل کلیک کنید</p>
+                                <img src="{% static "team/img/profile/Icon metro-upload.png" %}" width="24px" alt="">
+                            </div>
+
+                        </div>
+                        <div class="d-flex margin-top-link" id="team-member-form-link">
+                            <button type="submit" class="add-team-member-btn">
+                                <span id="add-member-submit">ثبت</span>
+                            </button>
+                            <a id="cancel"><span style="color: #06102e;font-size: 13px">لغو</span></a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            {#        **************************************************************************************************************************#}
+            <div id="edit-team-member">
+                <div class="edit-member">
+                    <span id="team-member-edit-form-title"
+                          style="margin-bottom: 20px;background-color: #F5F5F5;">ویرایش</span>
+                    <form id="edit-team-member-from" enctype="multipart/form-data">
+                        <span class="info2 otp-error edit_error_msg"></span>
+                        <div class="profile-input">
+                            <input type="text" name="first_name" maxlength="100" required=""
+                                   id="id_first_name" placeholder=" " autocomplete="off">
+                            <span>نام</span>
+                        </div>
+                        <div class="profile-input">
+                            <input type="text" name="last_name" maxlength="100" required=""
+                                   id="id_last_name" placeholder=" " autocomplete="off">
+                            <span>نام خانوادگی</span>
+                        </div>
+                        <div class="d-flex" style="color: #6c6c76">
+                            <span>رزومه</span>
+                            <div class="file-place" style="color: #6c6c76">
+                                <input type="file" name="file_resume" id="id_file_resume3">
+                                <p id="file-p3">برای انتخاب فایل کلیک کنید</p>
+                                <img src="{% static "team/img/profile/Icon metro-upload.png" %}" width="24px" alt="">
+                            </div>
+                        </div>
+                        <div class="d-flex margin-top-link" id="team-member-form-link">
+                            <button type="submit" id="edit-team-member-btn">
+                                <div class="edit-id"></div>
+                                <span id="edit-member-submit">ویرایش</span>
+                            </button>
+                            <a id="cancel"><span style="color: #06102e;font-size: 13px">لغو</span></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {#        ***************************************************************************************************************************#}
+            <button type="submit" class="profile-btn">
+                <span> ثبت مشخصات</span>
+            </button>
+        </div>
+    </div>
+    <script src="{% static 'accounts/js/jquery.min.js' %}"></script>
+    <script>
+        if ('{{ admin.file_resume }}' !== '') {
+            $('#file-p').text('{{ admin.file_resume }}'.split("/").slice(-1).pop());
+        }
+    </script>
+    <script>
+        update_member_title()
+        $(document).ready(function () {
+            $('#id_file_resume').change(function () {
+                $('#file-p').text(this.files[0].name);
+            });
+            $('#id_file_resume2').change(function () {
+                $('#file-p2').text(this.files[0].name);
+            });
+            $('#id_file_resume3').change(function () {
+                $('#file-p3').text(this.files[0].name);
+            });
+        });
+        let member_count =
+        {{ members.count }}
+        if (member_count >= 5) {
+            $(".add").hide()
+        }
+
+        $(document).on("click", ".add", function () {
+            if ($("#add-new-team-member-form").is(":visible")) {
+                $("#add-new-team-member-form").hide()
+            } else {
+                $("#edit-team-member").hide()
+                reset_add_form()
+                $(".wrapper").addClass("show")
+                $("#add-new-team-member-form").show()
+            }
+        });
+
+
+        function update_member_title() {
+            $.ajax({
+                type: 'GET',
+                url: "{% url 'team:get_members' %}",
+                success: function (response) {
+                    count_of_member = response['count']
+                    if (count_of_member > 0) {
+                        document.getElementById("members-title").innerHTML = "اعضا"
+                        $(".add-new-pre").removeClass("d-flex")
+                        $(".members").addClass("margin-bottom-title")
+                    } else {
+                        document.getElementById("members-title").innerHTML = "افزودن عضو جدید"
+                        $(".add-new-pre").addClass("d-flex")
+                        $(".members").removeClass("margin-bottom-title")
+
+                    }
+                }
+            })
+        }
+
+        function reset_add_form() {
+            $(".add_new_error_msg").css("visibility", "hidden");
+            $('#add-team-member-from').trigger("reset");
+            $('#file-p2').text('برای انتخاب فایل کلیک کنید');
+        }
+
+        $(document).on("click", ".profile-btn", function () {
+            document.getElementById("hidden-btn").click();
+        });
+        $(document).on("click", "#cancel", function () {
+            $("#add-new-team-member-form").hide()
+            $("#edit-team-member").hide()
+        });
+        $("#add-team-member-from").submit(function (e) {
+            $(".add_new_error_msg").css("visibility", "hidden");
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'team:add_member' %}",
+                data: formData,
+                success: function (data) {
+                    console.log("sucsess")
+                    $('#add-team-member-from').trigger("reset");
+                    $("#add-new-team-member-form").hide()
+                    let id = data['id']
+                    let full_name = data['fulname']
+                    let member_count = data['member_count']
+                    $(".members").append(
+                        `<div id="#member-${id}" class="team-member">
+                            <span id="member_name">${full_name}</span>
+                            <div class="image">
+                                <img class="ed-de-icon" src="{% static "team/img/profile/more.png" %}" width="18px"
+                                     height="18px" alt="">
+                                <div id="#edit-delete-${id}" class="overlay edit-delete">
+                                    <div class="d-flex-col">
+                                        <a id="#edit-${id}" class="edit"><span>ویرایش مشخصات</span></a>
+                                        <a id="#delete-${id}" class="delete"><span>حذف</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`)
+                    if (member_count >= 5) {
+                        $(".add").hide()
+                    }
+                    update_member_title()
+
+                },
+                error: function (data) {
+                    $(".add_new_error_msg").css("visibility", "visible");
+                    $('.add_new_error_msg').text(data['responseText'])
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            })
+        })
+    </script>
+    {#    delete item#}
+    <script>
+        $(document).on("click", ".delete", function () {
+            let delete_id = this.id.split("-").slice(-1).pop()
+            $.ajax({
+                type: 'DELETE',
+                url: "{% url 'team:remove' 12345 %}".replace(/12345/, delete_id),
+                success: function (response) {
+                    var element = document.getElementById(`#member-${delete_id}`);
+                    update_member_title()
+                    element.remove()
+                    let member_count = response['member_count']
+                    if (member_count < 5) {
+                        $(".add").show()
+                    }
+                }
+            })
+        });
+    </script>
+    {#    edit item#}
+    <script>
+        $(document).on("click", ".edit", function () {
+            let edit_id = this.id.split("-").slice(-1).pop()
+            $.ajax({
+                type: 'GET',
+                url: "{% url 'team:get_member' 12345 %}".replace(/12345/, edit_id),
+                success: function (response) {
+                    $("#add-new-team-member-form").hide()
+                    $('#edit-team-member').trigger("reset");
+                    $("#edit-team-member").show()
+                    $("#edit-team-member  #id_first_name").val(response['first_name'])
+                    $("#edit-team-member  #id_last_name").val(response['last_name'])
+                    $("#edit-team-member  #file-p3").text(response['file_name'])
+                    $(".edit-id").text(response['id'])
+                }
+            })
+        })
+    </script>
+    {#    edit#}
+    <script>
+        $("#edit-team-member-from").submit(function (e) {
+            var edit_obj = document.getElementsByClassName("edit-id")[0].innerHTML;
+            $(".edit_error_msg").css("visibility", "hidden");
+            console.log(edit_obj)
+            console.log("press2");
+            e.preventDefault();
+            console.log(this);
+            var formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'team:update_member' 12345 %}".replace(/12345/, edit_obj),
+                data: formData,
+                success: function (data) {
+                    var div = document.getElementById(`#member-${edit_obj}`);
+                    var span = div.getElementsByTagName("span")[0];
+                    let id = data['id'];
+                    let first_name = data['first_name'];
+                    let last_name = data['last_name'];
+                    span.innerHTML = first_name + " " + last_name;
+                    console.log(span)
+                    console.log(first_name + " " + last_name);
+                    $("#edit-team-member").hide()
+                },
+                error: function (data) {
+                    $(".edit_error_msg").css("visibility", "visible");
+                    $('.edit_error_msg').text(data['responseText'])
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            })
+        })
+    </script>
+{% endblock %}

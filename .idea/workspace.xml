@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5a3199a2-678c-4bd7-bf23-ab12e642a0c4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/apps/accounts/static/accounts/img/lock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/accounts/static/accounts/img/mobile icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/accounts/static/accounts/img/password icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/accounts/static/accounts/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/admin/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/admin/frequently_question.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/admin/roles.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/admin/sponsor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/admin/team.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/admin/team_user.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/models/frequently_questions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/serializesrs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/css/base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/css/code.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/css/flipdown.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/css/frequently_questions.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/css/get_content.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/css/home.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/css/profile.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/css/result.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/base/Icon awesome-power-off.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/base/Icon awesome-question.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/base/Icon feather-download.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/base/Icon material-home.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/base/Mask Group 3@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/base/Mask Group 3@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/base/close small.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/base/code svg.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/base/open small.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/base/profile.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/base/static.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/base/support.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/code/Icon feather-file.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/code/Icon material-autorenew.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/code/Icon material-delete.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/frequestly_question/Icon awesome-lightbulb.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/frequestly_question/Icon awesome-question (1).svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/get_content/Icon metro-upload.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/get_content/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/get_content/img_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/get_content/img_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/home/cpu.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/home/gpu.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/home/ram.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/profile/Icon metro-upload.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/profile/more.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/img/profile/plus.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/static/team/js/profile/profile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/templates/team/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/templates/team/code.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/templates/team/frequently_questions.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/templates/team/get_content.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/templates/team/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/templates/team/profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/templates/team/result.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/team/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/face_cup_3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/face_cup_3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/admin/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/models/team.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/team/models/team.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/models/team_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/team/models/team_user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/models/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/static/accounts/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/static/accounts/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/static/accounts/css/register.css" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/static/accounts/css/register.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/static/accounts/img/Component 1 – 2.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/static/accounts/img/email icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/static/accounts/img/email icon.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/templates/accounts/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/templates/accounts/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/templates/accounts/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/templates/accounts/second_login.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/templates/accounts/second_login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/templates/accounts/teamprofile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/templates/accounts/update.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/admin/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/static/accounts/css/otp.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/models/rules.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/models/sponsor.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/team/models/sponsor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/templates/home/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/templates/home/sendcode.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/team/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/home/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/utilities.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facecup/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/facecup/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facecup/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/facecup/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/message.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/navbar.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="JavaScript File" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JupyterTrust" id="a8535aba-e6c1-41d3-bf60-d9d5965b7766" />
+  <component name="ProjectId" id="1vTMuixr89zazstuTo1Bt2ADgPt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/apps/team/static/team/img/code" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\olom_sabz\face-cup\apps\team\static\team\img\base" />
+      <recent name="D:\olom_sabz\face-cup\apps\accounts\admin" />
+      <recent name="D:\olom_sabz\face-cup\apps\team\models" />
+      <recent name="D:\olom_sabz\face-cup\apps" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\olom_sabz\face-cup\apps\team\static\team\img\code" />
+      <recent name="D:\olom_sabz\face-cup\apps\team\static\team\js\result" />
+      <recent name="D:\olom_sabz\face-cup\apps\team\static\team\css" />
+      <recent name="D:\olom_sabz\face-cup\apps\team\static\team\img\frequestly_question" />
+      <recent name="D:\olom_sabz\face-cup\apps\team\static\team\img\profile" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5a3199a2-678c-4bd7-bf23-ab12e642a0c4" name="Default Changelist" comment="" />
+      <created>1626581850524</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1626581850524</updated>
+      <workItem from="1626581851707" duration="7484000" />
+      <workItem from="1626590027329" duration="19155000" />
+      <workItem from="1626667776313" duration="28693000" />
+      <workItem from="1626756292694" duration="9159000" />
+      <workItem from="1626765684915" duration="1994000" />
+      <workItem from="1626934448739" duration="458000" />
+      <workItem from="1626934969247" duration="55000" />
+      <workItem from="1626935064587" duration="203000" />
+      <workItem from="1626935310146" duration="15776000" />
+      <workItem from="1626977229698" duration="214000" />
+      <workItem from="1627030563802" duration="8229000" />
+      <workItem from="1627124433076" duration="5856000" />
+      <workItem from="1627185688308" duration="29988000" />
+      <workItem from="1627271572293" duration="28756000" />
+      <workItem from="1627360188179" duration="21407000" />
+      <workItem from="1627444282319" duration="12622000" />
+      <workItem from="1627464254729" duration="7303000" />
+      <workItem from="1627556259231" duration="3021000" />
+      <workItem from="1627582784526" duration="5095000" />
+      <workItem from="1627637284780" duration="15769000" />
+      <workItem from="1627705993250" duration="6635000" />
+      <workItem from="1627714186039" duration="2382000" />
+      <workItem from="1627716633984" duration="14668000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1627726552176">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627726552176" />
+    <state x="662" y="240" key="RollbackChangesDialog" timestamp="1627713295164">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="662" y="240" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627713295164" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1627713373947">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1627713373947" />
+    <state x="667" y="224" width="585" height="592" key="find.popup" timestamp="1627716763755">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="667" y="224" width="585" height="592" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1627716763755" />
+    <state x="740" y="421" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1627713389728">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="421" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627713389728" />
+    <state x="774" y="414" key="git4idea.ui.GitResetDialog" timestamp="1627713331712">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="774" y="414" key="git4idea.ui.GitResetDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627713331712" />
+  </component>
+</project>

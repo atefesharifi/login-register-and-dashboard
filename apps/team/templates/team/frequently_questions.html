@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'team/base.html' %}
+{% load static %}
+{% block title %}سوالات متداول{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'team/css/frequently_questions.css' %}">
+{% endblock %}
+{% block content %}
+    <h2>سؤالات متداول</h2>
+    {% for question in questions %}
+        <div class="question-box">
+            <div class="font question d-flex ">
+                <img class="image" src="{% static "team/img/frequestly_question/Icon awesome-question (1).svg" %}" width="20px"
+                     height="20px" alt="">
+                {{ question.question }}
+            </div>
+
+            <div class="answer font d-flex">
+                <img class="image" src="{% static "team/img/frequestly_question/Icon awesome-lightbulb.svg" %}" width="20px"
+                     height="20px" alt="">
+                <span style="font-size: 14px">{{ question.answer }}</span>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

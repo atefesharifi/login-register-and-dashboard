@@ -1,10 +1,56 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "team/css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    {% block css %}{% endblock %}
 </head>
-<body>
-$END$
+<body dir="rtl">
+<div class="header">
+    <img src="{% static 'team/img/base/Mask Group 3@2x.png' %}" style="width: 80px;height: 70px;z-index: 1" alt="">
+    <div class="team">
+        <div class="menu-icon"></div>
+        <span>{{ team.fa_name }}</span>
+        <ul>
+            <li><a href="{% url 'team:team_profile' %}">پروفایل</a></li>
+            <li><a href="{% url 'accounts:logout' %}">خروج از حساب کاربری</a></li>
+        </ul>
+    </div>
+
+</div>
+<div style="display: flex">
+    <div class="sidebar">
+        <ul class="list">
+            <li id="home"><a href="{% url 'team:home' %}"><img src="{% static "team/img/base/Icon material-home.svg" %}"
+                                                               alt=""><span>خانه</span></a></li>
+            <li id="profile"><a href="{% url 'team:team_profile' %}"><img src="{% static "team/img/base/profile.svg" %}"
+                                                                          alt=""><span>پروفایل</span></a>
+            </li>
+            <li id="download"><a href="{% url 'team:get_content' %}"><img
+                    src="{% static "team/img/base/Icon feather-download.svg" %}" alt=""><span>دریافت محتوا</span></a>
+            </li>
+            <li id="code"><a href="{% url "team:sent_code" %}"><img src="{% static "team/img/base/code svg.svg" %}"
+                                                                    alt=""><span>ارسال کد</span></a></li>
+            <li id="static"><a href="{% url "team:result" %}"><img src="{% static "team/img/base/static.svg" %}" alt=""><span>نتایج</span></a>
+            </li>
+            <li id="support"><a href=""><img src="{% static "team/img/base/support.svg" %}" alt=""><span>پشتیبانی</span></a>
+            </li>
+        </ul>
+        <ul class="list" id="last-ul">
+            <li id="frequently_question"><a href="{% url 'team:frequently_question' %}"><img
+                    src="{% static "team/img/base/Icon awesome-question.svg" %}"
+                    alt=""><span>سؤالات متداول</span></a></li>
+            <li><a href="{% url 'accounts:logout' %}"><img src="{% static "team/img/base/Icon awesome-power-off.svg" %}"
+                                                           alt=""><span>خروج</span></a></li>
+        </ul>
+    </div>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
 </body>
 </html>

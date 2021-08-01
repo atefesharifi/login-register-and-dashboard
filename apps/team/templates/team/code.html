@@ -1,10 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'team/base.html' %}
+{% load static %}
+{% block title %}ارسال کد{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'team/css/code.css' %}">
+{% endblock %}
+{% block content %}
+    <h2>ارسال کد</h2>
+    <form id="send-code" enctype="multipart/form-data">
+        <div class="d-flex file-box" style="color: #6c6c76">
+            <span>فایل داکر</span>
+            <div class="file-place" style="color: #6c6c76">
+                <input type="file" name="file_resume" id="id_file_resume">
+                <p id="file-p">برای انتخاب فایل کلیک کنید</p>
+                <img src="{% static "team/img/profile/Icon metro-upload.png" %}" width="24px" alt="">
+                <button type="submit" id="send_code_btn" hidden></button>
+            </div>
+        </div>
+    </form>
+    <div class="after-load d-flex-box">
+        <div class="right d-flex-right">
+            <img src="{% static "team/img/code/Icon feather-file.svg" %}" width="25px" height="32px" alt="">
+            <div class="d-flex-left" style="margin-right: 15px">
+                <span id="file_name">file_name.tar</span>
+                <span class="date">23:11 - 1400/04/21</span>
+            </div>
+        </div>
+        <div class="left d-flex-left">
+            <img src="{% static "team/img/code/Icon material-delete.svg" %}" width="12px" height="16px"
+                 style="margin-bottom: 10px" alt="">
+            <img src="{% static "team/img/code/Icon material-autorenew.svg" %}" width="12px" height="16px" alt="">
+        </div>
+
+    </div>
+    <h4 class="font attention">توجه:</h4>
+    <p class="font description">
+        فایل انتخابی باید با فرمت <span class="font attention">tar.</span> باشد<br>
+        تا قبل از ساعت ۲۴<span class="font attention"> تاریخ روز ۱۴ بهمن ماه ۱۴۰۰</span> می‌توانید به دفعات کد خود را
+        حذف و ویرایش نمایید<br>
+        آخرین کد شما جهت ارزیابی مورد بررسی قرار می‌گیرد <br>
+    </p>
+    <script src="{% static 'accounts/js/jquery.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#id_file_resume').change(function () {
+                document.getElementById("send_code_btn").click();
+            });
+        });
+    </script>
+    {#    send file#}
+    <script>
+        $("#send-code").submit(function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'team:send_code' %}",
+                data: formData,
+                success: function (data) {
+                    $("#file_name").text(data['code_name'])
+                },
+                error: function (data) {
+                    console.log("no")
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        })
+
+    </script>
+{% endblock %}

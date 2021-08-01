@@ -1,0 +1,11 @@
+Error:django.core.exception
+solution: 
+1.in settig.py
+MIDDELEWARE=['corsheaders.middleware.CorsMiddleware']یا اینو بردار
+2.  install:django.core.headers
+
+
+
+
+
+ 
