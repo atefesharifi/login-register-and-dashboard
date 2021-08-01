@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24.016" height="20.124" viewBox="0 0 24.016 20.124">
+    <defs>
+        <style>
+            .cls-1{fill:#ececec}
+        </style>
+    </defs>
+    <g id="code_svg" transform="translate(-115.992 -9.938)">
+        <path id="Path_2804" d="M143.121 11.33l5.508 4.957-5.508 4.82v4.957l11.016-9.777-11.016-10.328z" class="cls-1" transform="translate(-14.129 3.998)"/>
+        <path id="Path_2805" d="M0 5.37l5.508 4.957L0 15.147V20.1l11.016-9.777L0 0z" class="cls-1" transform="translate(127.008 30.043) rotate(180)"/>
+    </g>
+</svg>

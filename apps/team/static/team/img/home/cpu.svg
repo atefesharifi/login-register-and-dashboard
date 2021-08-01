@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="41.5" height="41.5" viewBox="0 0 41.5 41.5">
+    <defs>
+        <style>
+            .cls-1{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px;stroke:#000}.cls-2{stroke:#000;stroke-width:.5px}
+        </style>
+    </defs>
+    <g id="cpu" transform="translate(-0.75 -0.75)">
+        <path id="Path_2806" d="M9.875 6h23.25A3.875 3.875 0 0 1 37 9.875v23.25A3.875 3.875 0 0 1 33.125 37H9.875A3.875 3.875 0 0 1 6 33.125V9.875A3.875 3.875 0 0 1 9.875 6z" class="cls-1"/>
+        <path id="Path_2807" d="M13.5 13.5h12.634v12.634H13.5z" class="cls-1" transform="translate(1.683 1.683)"/>
+        <path id="Path_2808" d="M13.5 1.5v2.625" class="cls-1" transform="translate(2.545)"/>
+        <path id="Path_2809" d="M22.5 1.5v2.625" class="cls-1" transform="translate(4.455)"/>
+        <path id="Path_2810" d="M13.5 30v2.25" class="cls-1" transform="translate(2.545 9.25)"/>
+        <path id="Path_2811" d="M22.5 30v2.25" class="cls-1" transform="translate(4.455 9.25)"/>
+        <path id="Path_2812" d="M30 13.5h2.6" class="cls-1" transform="translate(8.897 2.545)"/>
+        <path id="Path_2813" d="M30 21h2.6" class="cls-1" transform="translate(8.897 4.136)"/>
+        <path id="Path_2814" d="M1.5 13.5h2.6" class="cls-1" transform="translate(0 2.545)"/>
+        <path id="Path_2815" d="M1.5 21h2.6" class="cls-1" transform="translate(0 4.136)"/>
+        <g id="cpu-2" transform="translate(-935.892 -444.433)">
+            <path id="Path_2838" d="M957.355 467.651h-1.226a.371.371 0 0 1-.237-.075.328.328 0 0 1-.037-.236v-2.453s-.031-.173.037-.251.237-.06.237-.06h1.226v-.676h-2.306v4.411h2.306z" class="cls-2" transform="translate(-2 -0.107)"/>
+            <path id="Path_2839" d="M960.016 468.2v-4.539h2.178v2.819h-1.464v1.72z" class="cls-2" transform="translate(-3.777 0)"/>
+            <path id="Path_2840" d="M965.349 463.9h-.769v3.533a1.293 1.293 0 0 0 .351.7 1.22 1.22 0 0 0 .748.178 1.135 1.135 0 0 0 .713-.178 1.525 1.525 0 0 0 .4-.7V463.9h-.769v3.533s-.179.256-.348.256-.329-.256-.329-.256z" class="cls-2" transform="translate(-5.37 -0.235)"/>
+            <path id="Path_2841" fill="#fff" d="M961.258 465.341h.75v1.135h-.75z" transform="translate(-4.341 -0.763)"/>
+        </g>
+    </g>
+</svg>
